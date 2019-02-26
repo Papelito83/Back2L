@@ -1,10 +1,10 @@
 # Back2L
 Le projet le plus ambitieux  du XXIème siècle  
 
-## Conception
+## Conception - UML
 
-Le diagrame Entity : https://www.lucidchart.com/documents/edit/3e266ee5-ea0b-4e1a-9a22-b4f8a358c0bf/0?shared=true&
-Le diagrame Command Pattern UML : https://www.lucidchart.com/invitations/accept/8552b6cb-58c5-457a-b96f-2c05e6a61356
+Entity diagram : https://www.lucidchart.com/documents/edit/3e266ee5-ea0b-4e1a-9a22-b4f8a358c0bf/0?shared=true&
+Command pattern diagram : https://www.lucidchart.com/invitations/accept/8552b6cb-58c5-457a-b96f-2c05e6a61356
 
 ## Gestion de projet
 
