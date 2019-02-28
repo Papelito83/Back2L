@@ -42,7 +42,12 @@ public class Character : MonoBehaviour, IDamageable
 
     public void MoveHorizontal(float dir)
     {
-        rigid.velocity = new Vector2(dir * 5.0f, 0);
+        rigid.velocity = new Vector2(dir * 5.0f, rigid.velocity.y);
+    }
+
+    public void Jump()
+    {
+        rigid.velocity = new Vector2(rigid.velocity.x, 10.0f);
     }
 }
 

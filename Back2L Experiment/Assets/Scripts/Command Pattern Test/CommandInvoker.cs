@@ -7,22 +7,18 @@ using UnityEngine;
 
 public class CommandInvoker : MonoBehaviour
 {
-    [SerializeField]
-    private float dirX;
-
-    [SerializeField]
-    private float dirY;
-
     private ICommand moveLeft;
     private ICommand moveRight;
+    private ICommand jump;
 
-    public GameObject otherGameObject;
+    public GameObject playerObject;
 
     public void Start()
     {
-        Character character = otherGameObject.GetComponent<Character>();
+        Character character = playerObject.GetComponent<Character>();
         moveLeft = new MoveLeft(character);
         moveRight= new MoveRight(character);
+        jump = new Jump(character);
     }
 
     public void Update()
@@ -32,7 +28,8 @@ public class CommandInvoker : MonoBehaviour
 
     private void HandleInput()
     {
-        dirX = Input.GetAxisRaw("Horizontal");
+        float dirX = Input.GetAxisRaw("Horizontal");
+        float dirY = Input.GetAxisRaw("Vertical");
 
         if (dirX > 0)
         {
@@ -41,6 +38,11 @@ public class CommandInvoker : MonoBehaviour
         else if (dirX < 0)
         {
             moveLeft.Execute();
+        }
+
+        if(dirY > 0)
+        {
+            jump.Execute();
         }
     }
 }
