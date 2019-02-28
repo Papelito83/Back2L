@@ -7,21 +7,39 @@ public class Character : MonoBehaviour, IDamageable
     private Inventory inventory;
     private IWeapon weapon;
 
-    [SerializeField]
-    private Rigidbody2D rigid;
-
-    [SerializeField]
     public float Health { get; private set; }
 
+    [SerializeField] private Rigidbody2D rigid;
+
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] Transform groundCheck;
+
+    [SerializeField] private float groundRadius;
+    [SerializeField] private bool grounded;
+         
     private void Awake()
     {       
         inventory = new Inventory();
+        groundRadius = 0.2f;
         Health = 100;
     }
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        grounded = false;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundRadius, groundMask);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+                grounded = true;
+        }
     }
 
     public void UseWeapon(IWeapon weapon)
@@ -47,7 +65,8 @@ public class Character : MonoBehaviour, IDamageable
 
     public void Jump()
     {
-        rigid.velocity = new Vector2(rigid.velocity.x, 10.0f);
+        if(grounded)
+            rigid.velocity = new Vector2(rigid.velocity.x, 10.0f);
     }
 }
 
