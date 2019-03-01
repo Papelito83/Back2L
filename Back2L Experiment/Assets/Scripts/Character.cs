@@ -11,21 +11,28 @@ public class Character : MonoBehaviour, IDamageable
 
     [SerializeField] private Rigidbody2D rigid;
 
-    [SerializeField] LayerMask groundMask;
-    [SerializeField] Transform groundCheck;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private Transform groundCheck;
 
     [SerializeField] private float groundRadius;
     [SerializeField] private bool grounded;
+
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpSpeed;
          
     private void Awake()
-    {       
+    {
+        moveSpeed = 5.0f;
+        jumpSpeed = 10.0f;
+
         inventory = new Inventory();
-        groundRadius = 0.2f;
+        groundRadius = 0.6f;
         Health = 100;
     }
 
     private void Start()
     {
+        groundMask = LayerMask.GetMask("Ground");
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -60,13 +67,19 @@ public class Character : MonoBehaviour, IDamageable
 
     public void MoveHorizontal(float dir)
     {
-        rigid.velocity = new Vector2(dir * 5.0f, rigid.velocity.y);
+        rigid.velocity = new Vector2(dir * moveSpeed, rigid.velocity.y);
     }
 
     public void Jump()
     {
         if(grounded)
-            rigid.velocity = new Vector2(rigid.velocity.x, 10.0f);
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed);
+    }
+
+    // Debug circle collier
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 }
 

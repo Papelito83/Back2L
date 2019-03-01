@@ -20,7 +20,7 @@ public class Jump : ICommand
 
     public void Undo()
     {
-        throw new NotImplementedException();
+        
     }
 }
 

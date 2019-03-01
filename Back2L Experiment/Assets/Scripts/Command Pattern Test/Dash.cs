@@ -8,12 +8,12 @@ class Dash : ICommand
 {
     public void Execute()
     {
-        throw new NotImplementedException();
+        
     }
 
     public void Undo()
     {
-        throw new NotImplementedException();
+        
     }
 } 
 

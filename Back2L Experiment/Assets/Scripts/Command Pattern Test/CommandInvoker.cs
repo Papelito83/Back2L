@@ -16,6 +16,7 @@ public class CommandInvoker : MonoBehaviour
     public void Start()
     {
         Character character = playerObject.GetComponent<Character>();
+
         moveLeft = new MoveLeft(character);
         moveRight= new MoveRight(character);
         jump = new Jump(character);
