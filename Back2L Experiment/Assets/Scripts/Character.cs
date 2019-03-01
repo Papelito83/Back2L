@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour, IDamageable
+public class Character : PhysicsObject, IDamageable
 {
     private Inventory inventory;
     private IWeapon weapon;
@@ -11,48 +11,31 @@ public class Character : MonoBehaviour, IDamageable
 
     [SerializeField] private Rigidbody2D rigid;
 
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private Transform groundCheck;
-
-    [SerializeField] private float groundRadius;
-    [SerializeField] private bool grounded;
-
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
+
+    private bool isJumping;
          
     private void Awake()
     {
+        isJumping = false;
         moveSpeed = 5.0f;
-        jumpSpeed = 10.0f;
+        jumpSpeed = 7.0f;
 
         inventory = new Inventory();
-        groundRadius = 0.6f;
         Health = 100;
     }
 
     private void Start()
     {
-        groundMask = LayerMask.GetMask("Ground");
         rigid = GetComponent<Rigidbody2D>();
-    }
-
-    private void FixedUpdate()
-    {
-        grounded = false;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundRadius, groundMask);
-
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].gameObject != gameObject)
-                grounded = true;
-        }
     }
 
     public void UseWeapon(IWeapon weapon)
     {
         
     }
+
 
     public bool HasItem(IItem item)
     {
@@ -67,19 +50,25 @@ public class Character : MonoBehaviour, IDamageable
 
     public void MoveHorizontal(float dir)
     {
-        rigid.velocity = new Vector2(dir * moveSpeed, rigid.velocity.y);
+        Debug.Log("move call");
+
+        Vector2 move = Vector2.zero;
+
+        move.x = dir;
+
+        targetVelocity = move * moveSpeed;
     }
 
+    public void NoMove()
+    {
+       targetVelocity = Vector2.zero;
+    }
+       
     public void Jump()
     {
-        if(grounded)
-            rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed);
+        if (grounded)
+            velocity.y = jumpSpeed;
     }
 
-    // Debug circle collier
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
-    }
 }
 

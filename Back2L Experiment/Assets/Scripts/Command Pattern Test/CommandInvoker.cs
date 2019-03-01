@@ -9,6 +9,7 @@ public class CommandInvoker : MonoBehaviour
 {
     private ICommand moveLeft;
     private ICommand moveRight;
+    private ICommand noMove;
     private ICommand jump;
 
     public GameObject playerObject;
@@ -19,6 +20,7 @@ public class CommandInvoker : MonoBehaviour
 
         moveLeft = new MoveLeft(character);
         moveRight= new MoveRight(character);
+        noMove = new NoMove(character);
         jump = new Jump(character);
     }
 
@@ -39,6 +41,10 @@ public class CommandInvoker : MonoBehaviour
         else if (dirX < 0)
         {
             moveLeft.Execute();
+        }
+        else
+        {
+            noMove.Execute();
         }
 
         if(dirY > 0)

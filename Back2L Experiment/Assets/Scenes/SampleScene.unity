@@ -219,6 +219,16 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8058783117554921972, guid: e1f78435b9dc1794487606ad90d02b4f,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8058783117554921972, guid: e1f78435b9dc1794487606ad90d02b4f,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1f78435b9dc1794487606ad90d02b4f, type: 3}
 --- !u!1 &377263013
@@ -752,6 +762,8 @@ MonoBehaviour:
   groundCheck: {fileID: 1537066361}
   groundRadius: 0
   grounded: 0
+  moveSpeed: 0
+  jumpSpeed: 0
 --- !u!4 &1460421986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8058783117554921973, guid: e1f78435b9dc1794487606ad90d02b4f,
