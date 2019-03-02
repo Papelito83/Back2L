@@ -1,20 +1,20 @@
-﻿public class NoMove : ICommand
+﻿public class JumpOff : ICommand
 {
     Character character;
 
-    public NoMove(Character character)
+    public JumpOff(Character character)
     {
         this.character = character;
     }
 
     public void Execute()
     {
-        character.NoMove();
+        character.JumpTakeOff();
     }
 
     public void Undo()
     {
-        
+
     }
 }
 

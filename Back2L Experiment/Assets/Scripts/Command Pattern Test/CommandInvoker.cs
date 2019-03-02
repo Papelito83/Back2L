@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CommandInvoker : MonoBehaviour
 {
@@ -14,6 +9,7 @@ public class CommandInvoker : MonoBehaviour
     private ICommand moveLeft;
     private ICommand noMove;
     private ICommand jump;
+    private ICommand jumpOff;
 
     public GameObject playerObject;
 
@@ -25,6 +21,7 @@ public class CommandInvoker : MonoBehaviour
         moveLeft = new Move(character, MoveDirection.LEFT);
         noMove = new NoMove(character);
         jump = new Jump(character);
+        jumpOff = new JumpOff(character);
     }
 
     public void Update()
@@ -34,29 +31,25 @@ public class CommandInvoker : MonoBehaviour
 
     private void HandleInput()
     {
-        dirX = Input.GetAxis("Horizontal");
-        dirY = Input.GetAxis("Vertical");
+        dirX = Input.GetAxisRaw("Horizontal");
+        dirY = Input.GetAxisRaw("Vertical");
 
         if(Mathf.Abs(dirX) > 0)
         {
             if(dirX > 0)
-            {
                 moveRight.Execute();
-            }
             else
-            {
                 moveLeft.Execute();
-            }
         }
         else
         {
             noMove.Execute();
         }
 
-        if(dirY > 0)
-        {
+        if (Input.GetButtonDown("Jump"))
             jump.Execute();
-        }
+        else if (Input.GetButtonUp("Jump"))
+            jumpOff.Execute();
     }
 }
 

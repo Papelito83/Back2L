@@ -20,10 +20,10 @@ public class Move : ICommand
         switch(direction)
         {
             case MoveDirection.RIGHT:
-                character.MoveHorizontal(1);
+                character.MoveHorizontal(1.0f);
                 break;
             case MoveDirection.LEFT:
-                character.MoveHorizontal(-1);
+                character.MoveHorizontal(-1.0f);
                 break;
         }
     }

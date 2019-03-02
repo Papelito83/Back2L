@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Character : PhysicsObject, IDamageable
 {
@@ -9,26 +7,18 @@ public class Character : PhysicsObject, IDamageable
 
     public float Health { get; private set; }
 
-    [SerializeField] private Rigidbody2D rigid;
-
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-
-    private bool isJumping;
          
     private void Awake()
     {
-        isJumping = false;
+        inventory = new Inventory();
+
+        // move and jump var
         moveSpeed = 5.0f;
         jumpSpeed = 7.0f;
 
-        inventory = new Inventory();
         Health = 100;
-    }
-
-    private void Start()
-    {
-        rigid = GetComponent<Rigidbody2D>();
     }
 
     public void UseWeapon(IWeapon weapon)
@@ -65,9 +55,17 @@ public class Character : PhysicsObject, IDamageable
     }
        
     public void Jump()
-    {
-        if (grounded)
+    {       
+        if (grounded)          
             velocity.y = jumpSpeed;
+    }
+
+    public void JumpTakeOff()
+    {
+        if(velocity.y > 0)
+        {
+            velocity.y = velocity.y * 0.5f;
+        }
     }
 
 }
