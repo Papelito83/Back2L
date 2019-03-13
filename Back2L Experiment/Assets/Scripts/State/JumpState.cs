@@ -29,11 +29,16 @@ public class JumpState : CharacterState
 
         if (Mathf.Abs(x) > 0)
             character.MoveHorizontal(x);
+        else
+            character.NoMove();
 
-        if(character.Grounded)
-        {
-            this.ToState(new GroundState(character));
-        }
+        // Interuption du saut pendant l'ascendance
+        if (Input.GetButtonUp("Jump"))
+            character.JumpOff();
+
+        // Si le personnage est en redescente il passe à l'état FallState
+        if (character.IsFalling())
+            ToState(new FallState(character));
     }
 }
 

@@ -28,17 +28,19 @@ class GroundState : CharacterState
         float x = Input.GetAxisRaw("Horizontal");
 
         if(Mathf.Abs(x)>0)
-        {
             character.MoveHorizontal(x);
-        }
         else
-        {
             character.NoMove();
-        }
 
-        if(Input.GetButtonDown("Jump"))
+        //Si la touche de saut et utilisée et que le perso est "physiquement" grounded alors passage à JumpState
+        //Sinon si il n'est pas "physiquement" grounded il passe à FallState
+        if (Input.GetButtonDown("Jump") && character.Grounded)
         {
-            this.ToState(new JumpState(character));
+            ToState(new JumpState(character));
+        }
+        else if (!character.Grounded)
+        {
+            ToState(new FallState(character));
         }
     }
 }

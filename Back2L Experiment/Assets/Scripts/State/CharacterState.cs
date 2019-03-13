@@ -7,8 +7,8 @@
         this.character = character;
     }
 
-    public abstract void OnEnter();
-    public abstract void OnExit();
+    public virtual void OnEnter() { }
+    public virtual void OnExit() { }
     public abstract void Tick();
 
     public virtual void ToState(IState state)

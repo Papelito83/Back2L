@@ -2,13 +2,9 @@
 
 public class Character : PhysicsObject
 {
-    private IState movementState;
     private SpriteRenderer spriteRenderer;
 
-    public IState MovementState {
-        get { return movementState; }
-        set { movementState = value; }
-    }
+    public IState MovementState { get; set; }
 
     public bool Grounded {
         get{ return grounded; }
@@ -23,15 +19,15 @@ public class Character : PhysicsObject
         // move and jump var
         moveSpeed = 5.0f;
         jumpSpeed = 10.0f;
-        movementState = new GroundState(this);
+        MovementState = new GroundState(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        name = "Character State : " + movementState.ToString(); 
-        movementState.Tick();
+        name = "Character State : " + MovementState.ToString(); 
+        MovementState.Tick();
     }
 
     public void MoveHorizontal(float dir)
@@ -75,6 +71,12 @@ public class Character : PhysicsObject
         {
             velocity.y = velocity.y * 0.5f;
         }
+    }
+
+    // A revoir
+    public bool IsFalling()
+    {
+        return velocity.y < -0.0001f;
     }
 }
 

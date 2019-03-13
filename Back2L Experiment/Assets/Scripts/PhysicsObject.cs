@@ -27,8 +27,6 @@ public class PhysicsObject : MonoBehaviour
 
     void Start()
     {
-        grounded = false;
-
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
@@ -38,6 +36,8 @@ public class PhysicsObject : MonoBehaviour
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
+
+        grounded = false;
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
@@ -77,7 +77,7 @@ public class PhysicsObject : MonoBehaviour
                         currentNormal.x = 0;
                     }
                 }
-
+                
                 float projection = Vector2.Dot(velocity, currentNormal);
                 if (projection < 0)
                 {
