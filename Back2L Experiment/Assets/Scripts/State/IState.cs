@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface ICommand
+public interface IState
 {
-    void Execute();
-    void Undo();
+    void OnEnter();
+    void OnExit();
+    void Tick();
+    void ToState(IState state);
 }
 

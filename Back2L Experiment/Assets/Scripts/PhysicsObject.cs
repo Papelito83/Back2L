@@ -9,7 +9,7 @@ public class PhysicsObject : MonoBehaviour
     public float gravityModifier = 1f;
 
     protected Vector2 targetVelocity;
-    protected bool grounded;
+    [SerializeField] protected bool grounded;
     protected Vector2 groundNormal;
     protected Rigidbody2D rb2d;
     protected Vector2 velocity;
@@ -27,6 +27,8 @@ public class PhysicsObject : MonoBehaviour
 
     void Start()
     {
+        grounded = false;
+
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
@@ -36,8 +38,6 @@ public class PhysicsObject : MonoBehaviour
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
-
-        grounded = false;
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 

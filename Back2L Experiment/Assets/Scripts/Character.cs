@@ -1,52 +1,62 @@
 ﻿using UnityEngine;
 
-public class Character : PhysicsObject, IDamageable
+public class Character : PhysicsObject
 {
-    private Inventory inventory;
-    private IWeapon weapon;
+    private IState movementState;
+    private SpriteRenderer spriteRenderer;
 
-    public float Health { get; private set; }
+    public IState MovementState {
+        get { return movementState; }
+        set { movementState = value; }
+    }
+
+    public bool Grounded {
+        get{ return grounded; }
+        set { grounded = value; }
+    }
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
          
     private void Awake()
     {
-        inventory = new Inventory();
-
         // move and jump var
         moveSpeed = 5.0f;
-        jumpSpeed = 7.0f;
+        jumpSpeed = 10.0f;
+        movementState = new GroundState(this);
 
-        Health = 100;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void UseWeapon(IWeapon weapon)
+    private void Update()
     {
-        
-    }
-
-
-    public bool HasItem(IItem item)
-    {
-        return inventory.FindItem(item);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        if(Health > 0)
-            Health -= damage;
+        name = "Character State : " + movementState.ToString(); 
+        movementState.Tick();
     }
 
     public void MoveHorizontal(float dir)
     {
-        Debug.Log("move call");
-
         Vector2 move = Vector2.zero;
 
         move.x = dir;
 
+        Flip(move.x);
+
         targetVelocity = move * moveSpeed;
+    }
+
+    public void Dash()
+    {
+        
+    }
+
+    private void Flip(float dir)
+    {
+        bool flipSprite = (spriteRenderer.flipX ? (dir > 0.01f) : (dir < 0.01f));
+        if (flipSprite)
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
     }
 
     public void NoMove()
@@ -55,18 +65,16 @@ public class Character : PhysicsObject, IDamageable
     }
        
     public void Jump()
-    {       
-        if (grounded)          
-            velocity.y = jumpSpeed;
+    {              
+       velocity.y = jumpSpeed;
     }
 
-    public void JumpTakeOff()
+    public void JumpOff()
     {
         if(velocity.y > 0)
         {
             velocity.y = velocity.y * 0.5f;
         }
     }
-
 }
 
