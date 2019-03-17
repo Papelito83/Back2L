@@ -6,11 +6,6 @@ Florian : Graphiste / UI designer (jeu)
 Mehdi : Game Dev
 Nathan : Dev Web / Sound desiger / Storyteller
 
-Objectifs du prochain sprint: 
-
-
---- Rétrospective de sprint 2: 00/00 ---
-
 Partie sound-design:
   Les sons/bruitages :
     -	Pas sur terre
@@ -28,3 +23,20 @@ Partie sound-design:
     -	Musique de mini-boss
     -	Ambiance prairie pour tuto
     -	Ambiance des enfers
+
+ Partie graphique:
+   Textures du tuto:
+      - herbe
+      - terre 
+      - plateforme
+    
+    Décors tuto:
+      - arbre
+      - buisson
+
+
+--- Rétrospective de sprint 2: 00/00 ---
+
+
+    
+   
