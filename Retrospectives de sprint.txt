@@ -10,3 +10,21 @@ Objectifs du prochain sprint:
 
 
 --- Rétrospective de sprint 2: 00/00 ---
+
+Partie sound-design:
+  Les sons/bruitages :
+    -	Pas sur terre
+    -	Pas sur feuillage
+    -	Collecte d’objet
+    -	Bruit de projectile
+    -	Mouvement d’épée
+    -	Pas de sanglier
+    -	Pas d’ennemi lourd
+    -	Grognement de monstre
+    -	Dégât sur Malghor
+    -	Soupir d’âme déchue
+    
+  Les musiques/ambiances :
+    -	Musique de mini-boss
+    -	Ambiance prairie pour tuto
+    -	Ambiance des enfers
