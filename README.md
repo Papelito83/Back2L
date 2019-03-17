@@ -10,6 +10,7 @@ Command pattern diagram : https://www.lucidchart.com/invitations/accept/8552b6cb
 
 Mindmap : https://mind42.com/mindmap/0550ffa7-c472-401e-ad5b-80368c340b47  
 Le Trello : https://trello.com/team19259576  
+Rétrospectives de sprints : https://docs.google.com/document/d/1lfqaXvqFVawG_C3Js7kfTqEyGooNr1TdZS7Gk8DHTlY/edit?usp=sharing  
 
 ## Design
 
