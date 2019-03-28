@@ -1,32 +1,43 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class Character : PhysicsObject
+public class Character : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-
     public IState MovementState { get; set; }
 
-    public bool Grounded {
-        get{ return grounded; }
-        set { grounded = value; }
-    }
-
+    public PhysicsObject physic;
+    
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
-         
+
+    public bool Grounded
+    {
+        get { return physic.grounded; }
+        set { physic.grounded = value; }
+    }
+
     private void Awake()
     {
-        // move and jump var
         moveSpeed = 5.0f;
         jumpSpeed = 10.0f;
-        MovementState = new GroundState(this);
+    }
 
+    private void Start()
+    {
+        physic = GetComponent<PhysicsObject>();
+        MovementState = new GroundState(this);
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        name = "Character State : " + MovementState.ToString(); 
+        MovementState.HandleInput();
+    }
+
+    private void FixedUpdate()
+    {
+        physic.targetVelocity = Vector2.zero;
         MovementState.Tick();
     }
 
@@ -36,14 +47,45 @@ public class Character : PhysicsObject
 
         move.x = dir;
 
-        Flip(move.x);
+        if(Mathf.Abs(move.x) > 0f)
+            Flip(move.x);
 
-        targetVelocity = move * moveSpeed;
+        physic.targetVelocity = move * moveSpeed;
     }
 
-    public void Dash()
+    public void MoveHorizontal(float dir, float speedOffset)
     {
-        
+        MoveHorizontal(dir);
+
+        physic.targetVelocity = physic.targetVelocity * speedOffset;
+    }
+
+    public void Jump()
+    {
+        physic.velocity.y = jumpSpeed;
+    }
+
+    public void JumpOff()
+    {
+        if (physic.velocity.y > 0)
+        {
+            physic.velocity.y = physic.velocity.y * 0.5f;
+        }
+    }
+
+    public void Idle()
+    {
+        physic.velocity = Vector2.zero;
+    }
+
+    public bool IsFalling()
+    {
+        return physic.velocity.y < -0.0001f;
+    }
+
+    public bool DirectionFlipped()
+    {
+        return spriteRenderer.flipX;
     }
 
     private void Flip(float dir)
@@ -55,28 +97,4 @@ public class Character : PhysicsObject
         }
     }
 
-    public void NoMove()
-    {
-       targetVelocity = Vector2.zero;
-    }
-       
-    public void Jump()
-    {              
-       velocity.y = jumpSpeed;
-    }
-
-    public void JumpOff()
-    {
-        if(velocity.y > 0)
-        {
-            velocity.y = velocity.y * 0.5f;
-        }
-    }
-
-    // A revoir
-    public bool IsFalling()
-    {
-        return velocity.y < -0.0001f;
-    }
 }
-

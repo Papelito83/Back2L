@@ -2,23 +2,31 @@
 
 class FallState : CharacterState
 {
+
     public FallState(Character character) : base(character)
     {
 
     }
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
     public override void Tick()
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        HandleMovement();
 
-        if (Mathf.Abs(x) > 0)
-            character.MoveHorizontal(x);
-        else
-            character.NoMove();
-        
-        // Si le personnage est "physiquement" grounded il repasse à l'état GroundState
+        var dash = character.GetComponent<Dash>();
+
         if (character.Grounded)
             ToState(new GroundState(character));
+
+        if(DashKeyPressed)
+        {
+            if (dash != null & !dash.OnCooldDown())
+                ToState(new DashState(character, dash));
+        }
     }
 }
 

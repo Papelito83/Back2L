@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JumpState : CharacterState
 {
@@ -14,6 +9,8 @@ public class JumpState : CharacterState
 
     public override void OnEnter()
     {
+        base.OnEnter();
+
         character.Grounded = false;
         character.Jump();
     }
@@ -25,20 +22,23 @@ public class JumpState : CharacterState
 
     public override void Tick()
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        HandleMovement();
 
-        if (Mathf.Abs(x) > 0)
-            character.MoveHorizontal(x);
-        else
-            character.NoMove();
+        var dash = character.GetComponent<Dash>();
 
         // Interuption du saut pendant l'ascendance
-        if (Input.GetButtonUp("Jump"))
+        if (JumpKeyReleased)
             character.JumpOff();
 
         // Si le personnage est en redescente il passe à l'état FallState
         if (character.IsFalling())
             ToState(new FallState(character));
+
+        if(DashKeyPressed)
+        {
+            if(dash != null & !dash.OnCooldDown())
+                ToState(new DashState(character, dash));
+        }
     }
 }
 

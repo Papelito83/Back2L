@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public interface IState
+﻿public interface IState
 {
     void OnEnter();
     void OnExit();
     void Tick();
+    void HandleInput();
     void ToState(IState state);
 }
 
