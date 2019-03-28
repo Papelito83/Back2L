@@ -97,4 +97,9 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void StopVerticalMovement()
+    {
+        physic.velocity.y = 0;
+    }
+
 }

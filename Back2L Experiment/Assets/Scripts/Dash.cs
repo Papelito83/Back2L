@@ -17,13 +17,13 @@ public class Dash : MonoBehaviour
 
     [SerializeField] private float dashCoeff;
 
-    [SerializeField] bool IsActive = false;
+    bool IsActive = false;
 
-    [SerializeField] int timed;
     
     private void Awake()
     {
-        dashTime = 0.2f;
+        dashCoeff = 5f;
+        dashTime = 0.1f;
         dashTimeLeft = dashTime;
         dashCoolDownLeft = 0f;
         character = GetComponent<Character>();
@@ -50,6 +50,7 @@ public class Dash : MonoBehaviour
     {
         if (IsActive)
         {
+            character.StopVerticalMovement();
             if (dashTimeLeft <= 0)
             {
                 IsActive = false;
