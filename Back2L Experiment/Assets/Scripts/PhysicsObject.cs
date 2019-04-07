@@ -5,26 +5,32 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
-    public float minGroundNormalY = .65f;
-    public float gravityModifier = 1f;
+    private float minGroundNormalY = .65f;
+    [SerializeField] private float gravityModifier = 1f;
 
-    public Vector2 targetVelocity;
-    [SerializeField] public bool grounded;
-    [SerializeField] protected Vector2 groundNormal;
-    public Rigidbody2D rb2d;
-    public Vector2 velocity;
-    protected ContactFilter2D contactFilter;
-    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
-    protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+    public bool grounded { get; private set; }
+    public bool walled { get; private set; }
 
-    protected const float minMoveDistance = 0.001f;
-    protected const float shellRadius = 0.01f;
+    [HideInInspector] public Vector2 targetVelocity;
+    [HideInInspector] public Vector2 velocity;
+    private Vector2 groundNormal;
 
-    [SerializeField] protected int timed;
+    private Collider2D mainCollider;
+    private Rigidbody2D rb2d;
+
+    private ContactFilter2D contactFilter;
+    private RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+    private List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+
+    private const float minMoveDistance = 0.001f;
+    private const float shellRadius = 0.01f;
 
     void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
+
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        mainCollider = colliders.Where(x => !x.isTrigger).Single();       
     }
 
     void Start()
@@ -36,10 +42,15 @@ public class PhysicsObject : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Apply Gravity
         velocity += gravityModifier * Physics2D.gravity * 2*Time.deltaTime;
+
+        // Apply custom velocity
         velocity.x = targetVelocity.x;
+        velocity.y += targetVelocity.y;
 
         grounded = false;
+        walled = false;
 
         Vector2 deltaPosition = velocity * Time.deltaTime;
 
@@ -60,7 +71,7 @@ public class PhysicsObject : MonoBehaviour
 
         if (distance > minMoveDistance)
         {
-            int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+            int count = mainCollider.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
             hitBufferList.Clear();
             for (int i = 0; i < count; i++)
             {
@@ -70,6 +81,13 @@ public class PhysicsObject : MonoBehaviour
             for (int i = 0; i < hitBufferList.Count; i++)
             {
                 Vector2 currentNormal = hitBufferList[i].normal;
+                Debug.DrawRay(hitBufferList[i].point, new Vector3(currentNormal.x, currentNormal.y, 0), Color.red, 1.25f);
+
+                if (Mathf.Abs(currentNormal.x) > 0)
+                {
+                    walled = true;
+                }
+
                 if (currentNormal.y > minGroundNormalY)
                 {
                     grounded = true;
@@ -79,7 +97,7 @@ public class PhysicsObject : MonoBehaviour
                         currentNormal.x = 0;
                     }
                 }
-                
+
                 float projection = Vector2.Dot(velocity, currentNormal);
                 if (projection < 0)
                 {
@@ -91,7 +109,13 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
+        Debug.DrawRay(transform.position, velocity, Color.blue, 0.25f);
         rb2d.position = rb2d.position + move.normalized * distance;
+    }
+
+    public void StopVerticalMovement()
+    {
+        velocity.y = 0;
     }
 }
 

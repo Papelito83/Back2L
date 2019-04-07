@@ -6,15 +6,19 @@ public class Character : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public IState MovementState { get; set; }
 
-    public PhysicsObject physic;
-    
+    private PhysicsObject physic;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
 
     public bool Grounded
     {
         get { return physic.grounded; }
-        set { physic.grounded = value; }
+    }
+
+    public bool Walled
+    {
+        get { return physic.walled; }
     }
 
     private void Awake()
@@ -62,20 +66,20 @@ public class Character : MonoBehaviour
 
     public void Jump()
     {
-        physic.velocity.y = jumpSpeed;
+        physic.targetVelocity.y = jumpSpeed;
     }
 
     public void JumpOff()
     {
         if (physic.velocity.y > 0)
         {
-            physic.velocity.y = physic.velocity.y * 0.5f;
+            physic.targetVelocity.y = -physic.velocity.y * 0.5f;
         }
     }
 
     public void Idle()
     {
-        physic.velocity = Vector2.zero;
+        physic.targetVelocity = -physic.velocity;
     }
 
     public bool IsFalling()
@@ -99,7 +103,6 @@ public class Character : MonoBehaviour
 
     public void StopVerticalMovement()
     {
-        physic.velocity.y = 0;
+        physic.StopVerticalMovement();
     }
-
 }

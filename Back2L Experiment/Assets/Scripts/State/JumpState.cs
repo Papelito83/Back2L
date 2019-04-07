@@ -11,7 +11,6 @@ public class JumpState : CharacterState
     {
         base.OnEnter();
 
-        character.Grounded = false;
         character.Jump();
     }
 

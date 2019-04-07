@@ -41,8 +41,10 @@ class GroundState : CharacterState
         {
             if (dash != null & !dash.OnCooldDown())
                 ToState(new DashState(character, dash));
-        }
-        
+
+            if (dash.OnCooldDown())
+                DashKeyPressed = false;
+        }       
     }
 }
 
