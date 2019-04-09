@@ -4,7 +4,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public IState MovementState { get; set; }
 
     private PhysicsObject physic;
 
@@ -30,19 +29,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         physic = GetComponent<PhysicsObject>();
-        MovementState = new GroundState(this);
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void Update()
-    {
-        MovementState.HandleInput();
-    }
-
-    private void FixedUpdate()
-    {
-        physic.targetVelocity = Vector2.zero;
-        MovementState.Tick();
     }
 
     public void MoveHorizontal(float dir)
@@ -77,11 +64,6 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Idle()
-    {
-        physic.targetVelocity = -physic.velocity;
-    }
-
     public bool IsFalling()
     {
         return physic.velocity.y < -0.0001f;
@@ -99,10 +81,5 @@ public class Character : MonoBehaviour
         {
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
-    }
-
-    public void StopVerticalMovement()
-    {
-        physic.StopVerticalMovement();
     }
 }

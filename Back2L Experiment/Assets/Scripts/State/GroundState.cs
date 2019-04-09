@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 class GroundState : CharacterState
 {
@@ -17,32 +16,26 @@ class GroundState : CharacterState
         base.OnEnter();
     }
 
-    public override void OnExit()
-    {
-        
-    }
-
-    public override void Tick()
+    public override void Tick(StateMachine machine)
     {
         HandleMovement();
 
-        var dash = character.GetComponent<Dash>();
-
         if (JumpKeyPressed && character.Grounded)
-        {          
-            ToState(new JumpState(character));
+        {
+            machine.ToState(machine.jumpState);
         }
         else if (!character.Grounded)
         {
-            ToState(new FallState(character));
+            machine.ToState(machine.fallState);
         }
 
         if (DashKeyPressed)
         {
-            if (dash != null & !dash.OnCooldDown())
-                ToState(new DashState(character, dash));
+            var dash = character.GetComponent<Dash>();
 
-            if (dash.OnCooldDown())
+            if (!dash.OnCooldDown())
+                machine.ToState(machine.dashState);
+            else
                 DashKeyPressed = false;
         }       
     }

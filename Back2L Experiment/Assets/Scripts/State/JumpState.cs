@@ -14,16 +14,9 @@ public class JumpState : CharacterState
         character.Jump();
     }
 
-    public override void OnExit()
-    {
-        
-    }
-
-    public override void Tick()
+    public override void Tick(StateMachine machine)
     {
         HandleMovement();
-
-        var dash = character.GetComponent<Dash>();
 
         // Interuption du saut pendant l'ascendance
         if (JumpKeyReleased)
@@ -31,12 +24,14 @@ public class JumpState : CharacterState
 
         // Si le personnage est en redescente il passe à l'état FallState
         if (character.IsFalling())
-            ToState(new FallState(character));
+            machine.ToState(machine.fallState);
 
         if(DashKeyPressed)
         {
-            if(dash != null & !dash.OnCooldDown())
-                ToState(new DashState(character, dash));
+            var dash = character.GetComponent<Dash>();
+
+            if (!dash.OnCooldDown())
+                machine.ToState(machine.dashState);
         }
     }
 }

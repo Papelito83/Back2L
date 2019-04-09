@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 class FallState : CharacterState
 {
+    LedgeDetector ledgeDetector;
 
-    public FallState(Character character) : base(character)
+    public FallState(Character character, LedgeDetector ledgeDetector) : base(character)
     {
-
+        this.ledgeDetector = ledgeDetector;
     }
 
     public override void OnEnter()
@@ -13,19 +15,22 @@ class FallState : CharacterState
         base.OnEnter();
     }
 
-    public override void Tick()
+    public override void Tick(StateMachine machine)
     {
         HandleMovement();
-
-        var dash = character.GetComponent<Dash>();
-
+       
         if (character.Grounded)
-            ToState(new GroundState(character));
+            machine.ToState(machine.groundState);
+
+        if (ledgeDetector.DetectWallLedge())
+            machine.ToState(machine.ledgeGrabState);
 
         if(DashKeyPressed)
         {
-            if (dash != null & !dash.OnCooldDown())
-                ToState(new DashState(character, dash));
+            var dash = character.GetComponent<Dash>();
+
+            if(!dash.OnCooldDown())
+                machine.ToState(machine.dashState);
         }
     }
 }

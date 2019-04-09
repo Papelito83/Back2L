@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 class DashState : CharacterState
 {
@@ -19,20 +18,15 @@ class DashState : CharacterState
         base.OnEnter();
     }
 
-    public override void OnExit()
-    {
-        
-    }
-
-    public override void Tick()
+    public override void Tick(StateMachine machine)
     {
         dash.Started();
         if (dash.Ended())
-        { 
+        {
             if (character.Grounded)
-                ToState(new GroundState(character));
+                machine.ToState(machine.groundState);
             else
-                ToState(new FallState(character));
+                machine.ToState(machine.fallState);
         }
     }
 }

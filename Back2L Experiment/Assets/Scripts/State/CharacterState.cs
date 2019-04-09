@@ -41,15 +41,7 @@ public abstract class CharacterState : IState
     }
     public virtual void OnExit() { }
 
-    public abstract void Tick();
-
-    public virtual void ToState(IState state)
-    {
-        character.MovementState.OnExit();
-        character.MovementState = state;
-        character.MovementState.OnEnter();
-        
-    }
+    public abstract void Tick(StateMachine machine);
 
     protected void HandleMovement()
     {

@@ -2,8 +2,7 @@
 {
     void OnEnter();
     void OnExit();
-    void Tick();
+    void Tick(StateMachine machine);
     void HandleInput();
-    void ToState(IState state);
 }
 

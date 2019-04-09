@@ -25,6 +25,8 @@ public class PhysicsObject : MonoBehaviour
     private const float minMoveDistance = 0.001f;
     private const float shellRadius = 0.01f;
 
+    public bool EnableGravity { get; set; }
+
     void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -35,6 +37,8 @@ public class PhysicsObject : MonoBehaviour
 
     void Start()
     {
+        EnableGravity = true;
+
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
@@ -42,8 +46,11 @@ public class PhysicsObject : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Apply Gravity
-        velocity += gravityModifier * Physics2D.gravity * 2*Time.deltaTime;
+        // Apply Gravity      
+         velocity += gravityModifier * Physics2D.gravity * 2*Time.deltaTime;
+
+        if (!EnableGravity)
+            velocity.y = 0;
 
         // Apply custom velocity
         velocity.x = targetVelocity.x;
@@ -109,13 +116,14 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
-        Debug.DrawRay(transform.position, velocity, Color.blue, 0.25f);
+        // Debug.DrawRay(transform.position, velocity, Color.blue, 0.25f);
         rb2d.position = rb2d.position + move.normalized * distance;
     }
 
-    public void StopVerticalMovement()
+    public void StopVerticalVelocity()
     {
         velocity.y = 0;
     }
+
 }
 
