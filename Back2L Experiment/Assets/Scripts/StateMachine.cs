@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private Character character;
+    private PlayerMovement playerMovement;
 
     private IState currentState;
 
@@ -21,14 +21,15 @@ public class StateMachine : MonoBehaviour
     {
         Dash dash = GetComponent<Dash>();
         LedgeDetector ledgeDetector = GetComponent<LedgeDetector>();
+        LedgeGrab ledgeGrabAbility = GetComponent<LedgeGrab>();
 
-        character = GetComponent<Character>();
+        playerMovement = GetComponent<PlayerMovement>();
 
-        groundState = new GroundState(character);
-        fallState = new FallState(character, ledgeDetector);
-        dashState = new DashState(character, dash);
-        jumpState = new JumpState(character);
-        ledgeGrabState = new LedgeGrabState(character, ledgeDetector);
+        groundState = new GroundState(playerMovement);
+        fallState = new FallState(playerMovement, ledgeDetector, ledgeGrabAbility);
+        dashState = new DashState(playerMovement, dash);
+        jumpState = new JumpState(playerMovement);
+        ledgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
 
         currentState = groundState;
     }

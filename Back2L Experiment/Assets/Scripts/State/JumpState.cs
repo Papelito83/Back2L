@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class JumpState : CharacterState
+public class JumpState : PlayerMovementState
 {
-    public JumpState(Character character) : base(character)
+    public JumpState(PlayerMovement playerMovement) : base(playerMovement)
     {
   
     }
@@ -11,7 +11,7 @@ public class JumpState : CharacterState
     {
         base.OnEnter();
 
-        character.Jump();
+        playerMovement.Jump();
     }
 
     public override void Tick(StateMachine machine)
@@ -20,15 +20,15 @@ public class JumpState : CharacterState
 
         // Interuption du saut pendant l'ascendance
         if (JumpKeyReleased)
-            character.JumpOff();
+            playerMovement.JumpOff();
 
         // Si le personnage est en redescente il passe à l'état FallState
-        if (character.IsFalling())
+        if (playerMovement.IsFalling())
             machine.ToState(machine.fallState);
 
         if(DashKeyPressed)
         {
-            var dash = character.GetComponent<Dash>();
+            var dash = playerMovement.GetComponent<Dash>();
 
             if (!dash.OnCooldDown())
                 machine.ToState(machine.dashState);

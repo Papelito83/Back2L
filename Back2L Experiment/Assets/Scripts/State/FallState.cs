@@ -1,13 +1,15 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-class FallState : CharacterState
+class FallState : PlayerMovementState
 {
-    LedgeDetector ledgeDetector;
+    private LedgeDetector ledgeDetector;
+    private LedgeGrab ledgeGrabAbility;
 
-    public FallState(Character character, LedgeDetector ledgeDetector) : base(character)
+    public FallState(PlayerMovement playerMovement, LedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
         this.ledgeDetector = ledgeDetector;
+        this.ledgeGrabAbility = ledgeGrabAbility;
     }
 
     public override void OnEnter()
@@ -19,15 +21,18 @@ class FallState : CharacterState
     {
         HandleMovement();
        
-        if (character.Grounded)
+        if (playerMovement.Grounded)
             machine.ToState(machine.groundState);
 
         if (ledgeDetector.DetectWallLedge())
+        {
+            ledgeGrabAbility.Grab(ledgeDetector.GetWallCollider());
             machine.ToState(machine.ledgeGrabState);
+        }
 
         if(DashKeyPressed)
         {
-            var dash = character.GetComponent<Dash>();
+            var dash = playerMovement.GetComponent<Dash>();
 
             if(!dash.OnCooldDown())
                 machine.ToState(machine.dashState);

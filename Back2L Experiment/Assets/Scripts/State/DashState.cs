@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class DashState : CharacterState
+class DashState : PlayerMovementState
 {
     private Dash dash;
 
-    public DashState(Character character, Dash dash) : base(character)
+    public DashState(PlayerMovement playerMovement, Dash dash) : base(playerMovement)
     {
         this.dash = dash;
     }
@@ -23,7 +23,7 @@ class DashState : CharacterState
         dash.Started();
         if (dash.Ended())
         {
-            if (character.Grounded)
+            if (playerMovement.Grounded)
                 machine.ToState(machine.groundState);
             else
                 machine.ToState(machine.fallState);

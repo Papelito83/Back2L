@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    private Character characterMovement;
-    private PhysicsObject characterPhysic;
+    private PlayerMovement playerMovement;
+    private PhysicsObject playerPhysics;
 
     [SerializeField] private float dashCoolDown = 1f;
     [SerializeField] private float dashCoolDownLeft;
@@ -31,8 +31,8 @@ public class Dash : MonoBehaviour
 
     private void Start()
     {
-        characterMovement = GetComponent<Character>();
-        characterPhysic = GetComponent<PhysicsObject>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerPhysics = GetComponent<PhysicsObject>();
     }
 
     private void Update()
@@ -56,7 +56,7 @@ public class Dash : MonoBehaviour
     {
         if (IsActive)
         {
-            characterPhysic.StopVerticalVelocity();
+            playerPhysics.StopVerticalVelocity();
             if (dashTimeLeft <= 0)
             {
                 IsActive = false;
@@ -65,10 +65,10 @@ public class Dash : MonoBehaviour
             else
             {
                 dashTimeLeft -= Time.deltaTime;
-                if (characterMovement.DirectionFlipped())
-                    characterMovement.MoveHorizontal(-1, dashCoeff);
+                if (playerMovement.DirectionFlipped())
+                    playerMovement.MoveHorizontal(-1, dashCoeff);
                 else
-                    characterMovement.MoveHorizontal(1, dashCoeff);
+                    playerMovement.MoveHorizontal(1, dashCoeff);
             }
         }
     }

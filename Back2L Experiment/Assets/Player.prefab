@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2260459118198996091}
   - component: {fileID: 8730872229173697104}
   - component: {fileID: 8814014498365363656}
+  - component: {fileID: 3369205258143461044}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -97,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 8058783117554921968}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fdb1ab38491223843ba4dedca4651906, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -223,3 +224,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f754fee54137e6a4a9117a435ecc1493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3369205258143461044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058783117554921968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535ad2f221e15424bb382318c8f6c48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderLedgeOwner: {fileID: 0}
+  coolDownBeforeAction: 1
+  coolDownLeft: 0

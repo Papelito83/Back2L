@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LedgeDetector : MonoBehaviour
 {
-    private Character character;
-    private Collider2D characterCollider;
+    private PlayerMovement playerMovement;
+    private Collider2D playerCollider;
     private Collider2D wallCollider;
 
     private Vector2[] rayLedgeDetector = new Vector2[2];
@@ -22,8 +22,8 @@ public class LedgeDetector : MonoBehaviour
 
     void Start()
     {
-        character = GetComponent<Character>();
-        characterCollider = GetComponent<BoxCollider2D>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerCollider = GetComponent<BoxCollider2D>();
 
         layerMask = ~(LayerMask.GetMask("Player"));
 
@@ -37,28 +37,26 @@ public class LedgeDetector : MonoBehaviour
     {
         int direction = 1;
 
-        if (character.DirectionFlipped())
+        if (playerMovement.DirectionFlipped())
             direction = -1;
 
         for (int i = 0; i < rayLedgeDetector.Length; i++)
-            rayLedgeDetector[i] = characterCollider.bounds.center;
+            rayLedgeDetector[i] = playerCollider.bounds.center;
 
-        hits = ComputeRayCasting(direction);
+        ComputeRayCasting(direction);
 
         return CheckForLedgeHits(hits);
     }
 
-    private RaycastHit2D[] ComputeRayCasting(int direction)
+    private void ComputeRayCasting(int direction)
     {
         for (int i = 0; i < rayLedgeDetector.Length; i++)
         {
-            rayLedgeDetector[i] += new Vector2(direction * characterCollider.bounds.extents.x, rayOffset[i] * characterCollider.bounds.extents.y);
+            rayLedgeDetector[i] += new Vector2(direction * playerCollider.bounds.extents.x, rayOffset[i] * playerCollider.bounds.extents.y);
             hits[i] = Physics2D.Raycast(rayLedgeDetector[i], direction * Vector3.right, rayDistance, layerMask);
 
             Debug.DrawRay(rayLedgeDetector[i], direction * 0.1f * Vector3.right, Color.blue);
         }
-
-        return hits;
     }
 
     private bool CheckForLedgeHits(RaycastHit2D[] hits)

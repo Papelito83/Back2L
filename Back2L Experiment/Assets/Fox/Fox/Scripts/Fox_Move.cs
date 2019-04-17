@@ -31,7 +31,7 @@ public class Fox_Move : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if(dead==false){
-		//Character doesnt choose direction in Jump									//If you want to choose direction in jump
+		//PlayerMovement doesnt choose direction in Jump									//If you want to choose direction in jump
 			if(attacking==false){													//just delete the (jumping==false)
 				if(jumping==false&&crouching==false){
 					Movement();
@@ -47,7 +47,7 @@ public class Fox_Move : MonoBehaviour {
 	}
 
 	void Movement(){
-		//Character Move
+		//PlayerMovement Move
 		float move = Input.GetAxisRaw("Horizontal");
 		if(Input.GetKey(KeyCode.Z)){
 			//Run

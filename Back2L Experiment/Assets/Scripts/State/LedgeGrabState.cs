@@ -5,68 +5,71 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class LedgeGrabState : CharacterState
-{
-    private PhysicsObject characterPhysics;
-    private LedgeDetector ledgeDetector;
+class LedgeGrabState : PlayerMovementState
+{ 
+    private LedgeGrab ledgeGrabAbility;
 
-    public LedgeGrabState(Character character, LedgeDetector ledgeDetector) : base(character)
+    public LedgeGrabState(PlayerMovement playerMovement, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
-        this.ledgeDetector = ledgeDetector;
-        characterPhysics = character.GetComponent<PhysicsObject>();
+        this.ledgeGrabAbility = ledgeGrabAbility;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-
-        characterPhysics.EnableGravity = false;
-    }
-
-    public override void OnExit()
-    {
-        characterPhysics.EnableGravity = true;
     }
 
     public override void Tick(StateMachine machine)
     {
-        if (character.DirectionFlipped())
-        {
-            if (Input.GetAxisRaw("Horizontal") > 0)
-                machine.ToState(machine.fallState);
-        }
-        else
-        {
-            if (Input.GetAxisRaw("Horizontal") < 0)
-                machine.ToState(machine.fallState);
-        }
+        Action<StateMachine> ledgeGrabExitAction = SelectExitAction();
 
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            SetPositionOnPlatform();
-            machine.ToState(machine.fallState);
-        }
-
-        if (JumpKeyPressed)
-            machine.ToState(machine.jumpState);
+        if (!ledgeGrabAbility.OnCoolDown())
+            ledgeGrabExitAction?.Invoke(machine); 
     }
 
-    public void SetPositionOnPlatform()
+    private Action<StateMachine> SelectExitAction()
     {
-        float horizontalCorrection, verticalCorrection;
-        Collider2D characterCollider = character.GetComponent<BoxCollider2D>();
-        Collider2D wallCollider = ledgeDetector.GetWallCollider();
+        if (LeaveGoodSide())
+            return FallTransition;
 
-        verticalCorrection = wallCollider.bounds.max.y - characterCollider.bounds.min.y;
+        if (Input.GetAxisRaw("Vertical") > 0)
+            return ClimbTransition;
 
-        if (character.DirectionFlipped())
-            horizontalCorrection = wallCollider.bounds.max.x - characterCollider.bounds.max.x;
-        else
-            horizontalCorrection = wallCollider.bounds.min.x - characterCollider.bounds.min.x;
+        if (JumpKeyPressed)
+            return JumpTransition;
 
-        Vector3 move = new Vector3(horizontalCorrection, verticalCorrection);
+        return null;
+    }
 
-        character.transform.position += move;
+    private bool LeaveGoodSide()
+    {
+        float horizontalDirection = Input.GetAxisRaw("Horizontal");
+
+        if (playerMovement.DirectionFlipped() && horizontalDirection > 0)
+            return true;
+
+        if (!playerMovement.DirectionFlipped() && horizontalDirection < 0)
+            return true;
+
+        return false;
+    }
+
+    private void JumpTransition(StateMachine machine)
+    {
+        ledgeGrabAbility.UnGrab();
+        machine.ToState(machine.jumpState);
+    }
+
+    private void FallTransition(StateMachine machine)
+    {
+        ledgeGrabAbility.UnGrab();
+        machine.ToState(machine.fallState);
+    }
+
+    private void ClimbTransition(StateMachine machine)
+    {
+        ledgeGrabAbility.Climb();
+        machine.ToState(machine.fallState);
     }
 }
 

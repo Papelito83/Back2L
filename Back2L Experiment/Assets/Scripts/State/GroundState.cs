@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class GroundState : CharacterState
+class GroundState : PlayerMovementState
 {
-    public GroundState(Character character) : base(character)
+    public GroundState(PlayerMovement playerMovement) : base(playerMovement)
     {
 
     }
@@ -20,18 +20,18 @@ class GroundState : CharacterState
     {
         HandleMovement();
 
-        if (JumpKeyPressed && character.Grounded)
+        if (JumpKeyPressed && playerMovement.Grounded)
         {
             machine.ToState(machine.jumpState);
         }
-        else if (!character.Grounded)
+        else if (!playerMovement.Grounded)
         {
             machine.ToState(machine.fallState);
         }
 
         if (DashKeyPressed)
         {
-            var dash = character.GetComponent<Dash>();
+            var dash = playerMovement.GetComponent<Dash>();
 
             if (!dash.OnCooldDown())
                 machine.ToState(machine.dashState);

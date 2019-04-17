@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-public abstract class CharacterState : IState
+public abstract class PlayerMovementState : IState
 {
-    protected Character character;
+    protected PlayerMovement playerMovement;
 
     protected bool JumpKeyPressed;
     protected bool JumpKeyReleased;
     protected bool DashKeyPressed;
 
-    public CharacterState(Character character)
+    public PlayerMovementState(PlayerMovement playerMovement)
     {
         JumpKeyPressed = false;
         JumpKeyReleased = false;
         DashKeyPressed = false;
-        this.character = character;
+        this.playerMovement = playerMovement;
     }
 
     public void HandleInput()
@@ -47,6 +47,6 @@ public abstract class CharacterState : IState
     {
         float x = Input.GetAxisRaw("Horizontal");
 
-        character.MoveHorizontal(x);
+        playerMovement.MoveHorizontal(x);
     }
 }
