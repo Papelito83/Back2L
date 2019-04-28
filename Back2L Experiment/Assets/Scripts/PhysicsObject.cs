@@ -47,7 +47,7 @@ public class PhysicsObject : MonoBehaviour
     void FixedUpdate()
     {
         // Apply Gravity      
-         velocity += gravityModifier * Physics2D.gravity * 2*Time.deltaTime;
+         velocity += gravityModifier * Physics2D.gravity * 2 * Time.deltaTime;
 
         if (!EnableGravity)
             velocity.y = 0;

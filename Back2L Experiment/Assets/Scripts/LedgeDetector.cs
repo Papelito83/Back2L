@@ -35,10 +35,10 @@ public class LedgeDetector : MonoBehaviour
 
     public bool DetectWallLedge()
     {
-        int direction = 1;
+        int direction = -1;
 
         if (playerMovement.DirectionFlipped())
-            direction = -1;
+            direction = 1;
 
         for (int i = 0; i < rayLedgeDetector.Length; i++)
             rayLedgeDetector[i] = playerCollider.bounds.center;
@@ -55,7 +55,7 @@ public class LedgeDetector : MonoBehaviour
             rayLedgeDetector[i] += new Vector2(direction * playerCollider.bounds.extents.x, rayOffset[i] * playerCollider.bounds.extents.y);
             hits[i] = Physics2D.Raycast(rayLedgeDetector[i], direction * Vector3.right, rayDistance, layerMask);
 
-            Debug.DrawRay(rayLedgeDetector[i], direction * 0.1f * Vector3.right, Color.blue);
+            Debug.DrawRay(rayLedgeDetector[i], direction * rayDistance * Vector3.right, Color.blue);
         }
     }
 
@@ -65,8 +65,10 @@ public class LedgeDetector : MonoBehaviour
 
         if (hits[0].collider != null)
         {
+            Debug.Log("Detect collider first ray");
             if (hits[1].collider != null)
             {
+                Debug.Log("Detect collider second ray");
                 if (firstRayHited)
                 {
                     ledgeWallDetected = true;

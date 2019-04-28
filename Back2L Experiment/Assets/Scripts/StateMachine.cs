@@ -9,7 +9,11 @@ public class StateMachine : MonoBehaviour
 {
     private PlayerMovement playerMovement;
 
-    private IState currentState;
+    private IState currentMovementState;
+    private IState currentAttackState;
+
+    public IState meleeAttackState { get; private set; }
+    public IState noAttackState { get; private set; }
 
     public IState groundState { get; private set; }
     public IState fallState { get; private set; }
@@ -19,11 +23,14 @@ public class StateMachine : MonoBehaviour
 
     public void Start()
     {
+        PlayerAttack playerAttack;
+
         Dash dash = GetComponent<Dash>();
         LedgeDetector ledgeDetector = GetComponent<LedgeDetector>();
         LedgeGrab ledgeGrabAbility = GetComponent<LedgeGrab>();
 
         playerMovement = GetComponent<PlayerMovement>();
+        playerAttack = GetComponent<PlayerAttack>();
 
         groundState = new GroundState(playerMovement);
         fallState = new FallState(playerMovement, ledgeDetector, ledgeGrabAbility);
@@ -31,24 +38,37 @@ public class StateMachine : MonoBehaviour
         jumpState = new JumpState(playerMovement);
         ledgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
 
-        currentState = groundState;
+        meleeAttackState = new MeleeAttackState(playerAttack);
+        noAttackState = new NoAttackState(playerAttack);
+
+        currentMovementState = groundState;
+        currentAttackState = noAttackState;
     }
 
     public void Update()
     {
-        currentState.HandleInput();
+        currentMovementState.HandleInput();
+        currentAttackState.HandleInput();
     }
 
     public void FixedUpdate()
     {
-        currentState.Tick(this);
+        name = currentMovementState.ToString();
+        currentMovementState.Tick(this);
     }
 
-    public void ToState(IState nextState)
+    public void ToMovementState(IState nextMovementState)
     {
-        currentState.OnExit();
-        currentState = nextState;
-        currentState.OnEnter();
+        currentMovementState.OnExit();
+        currentMovementState = nextMovementState;
+        currentMovementState.OnEnter();
+    }
+
+    public void ToAttackState(IState nextAttackState)
+    {
+        currentAttackState.OnExit();
+        currentAttackState = nextAttackState;
+        currentAttackState.OnEnter();
     }
 }
 
