@@ -18,7 +18,7 @@ class DefensePowerUp : MonoBehaviour
         Radius = 0.5f;
     }
 
-    public void ExecuteEffect(Transform target)
+    private void ExecuteEffect(Transform target)
     {
         defenseEffect.ExecuteEffect(target);
         Destroy(gameObject);
