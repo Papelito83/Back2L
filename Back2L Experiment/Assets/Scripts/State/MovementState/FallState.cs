@@ -17,8 +17,6 @@ class FallState : PlayerMovementState
 
     public override void OnEnter()
     {
-        base.OnEnter();
-
         animator.SetBool("IsFalling", true);
     }
 
@@ -27,10 +25,12 @@ class FallState : PlayerMovementState
         animator.SetBool("IsFalling", false);
     }
 
-    public override void Tick(StateMachine machine)
+    protected override void PerformeTransition(StateMachine machine)
     {
         HandleMovement();
-       
+
+        playerMovement.WallSlide();
+
         if (playerMovement.Grounded)
             machine.ToMovementState(machine.groundState);
 
@@ -40,7 +40,12 @@ class FallState : PlayerMovementState
             machine.ToMovementState(machine.ledgeGrabState);
         }
 
-        if(DashKeyPressed)
+        if (playerMovement.Walled && JumpKeyPressed)
+        {
+            machine.ToMovementState(machine.wallJumpState);
+        }
+
+        if (DashKeyPressed)
         {
             var dash = playerMovement.GetComponent<Dash>();
 

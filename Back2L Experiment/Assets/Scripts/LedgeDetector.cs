@@ -65,16 +65,19 @@ public class LedgeDetector : MonoBehaviour
 
         if (hits[0].collider != null)
         {
-            Debug.Log("Detect collider first ray");
             if (hits[1].collider != null)
             {
-                Debug.Log("Detect collider second ray");
                 if (firstRayHited)
-                {
-                    ledgeWallDetected = true;
+                {                   
                     firstRayHited = false;
 
-                    wallCollider = hits[0].collider;
+                    // petite astuce pour le système de respawn à corriger plus tard
+                    if (!hits[0].collider.isTrigger)
+                    {
+                        ledgeWallDetected = true;
+                        wallCollider = hits[0].collider;
+                    }
+
                 }
             }
             else

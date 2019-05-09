@@ -20,6 +20,7 @@ public class StateMachine : MonoBehaviour
     public IState dashState { get; private set; }
     public IState jumpState { get; private set; }
     public IState ledgeGrabState { get; private set; }
+    public IState wallJumpState { get; private set; }
 
     public void Start()
     {
@@ -37,6 +38,7 @@ public class StateMachine : MonoBehaviour
         dashState = new DashState(playerMovement, dash);
         jumpState = new JumpState(playerMovement);
         ledgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
+        wallJumpState = new WallJumpState(playerMovement);
 
         meleeAttackState = new MeleeAttackState(playerAttack);
         noAttackState = new NoAttackState(playerAttack);

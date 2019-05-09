@@ -14,12 +14,7 @@ class LedgeGrabState : PlayerMovementState
         this.ledgeGrabAbility = ledgeGrabAbility;
     }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
-    }
-
-    public override void Tick(StateMachine machine)
+    protected override void PerformeTransition(StateMachine machine)
     {
         Action<StateMachine> ledgeGrabExitAction = SelectExitAction();
 
@@ -32,10 +27,7 @@ class LedgeGrabState : PlayerMovementState
         if (LeaveGoodSide())
             return FallTransition;
 
-        /*if (Input.GetAxisRaw("Vertical") > 0)
-            return ClimbTransition;*/
-
-        if (JumpKeyPressed)
+        if (Jump())
             return JumpTransition;
 
         return null;
@@ -66,11 +58,9 @@ class LedgeGrabState : PlayerMovementState
         machine.ToMovementState(machine.fallState);
     }
 
-    /*private void ClimbTransition(StateMachine machine)
+    private bool Jump()
     {
-        ledgeGrabAbility.Climb();
-        machine.ToMovementState(machine.fallState);
+        return JumpKeyPressed;
     }
-    */
 }
 

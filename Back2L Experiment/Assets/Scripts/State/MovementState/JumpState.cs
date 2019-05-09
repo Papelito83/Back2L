@@ -11,8 +11,6 @@ public class JumpState : PlayerMovementState
 
     public override void OnEnter()
     {
-        base.OnEnter();
-
         animator.SetBool("IsJumping", true);
         playerMovement.Jump();
     }
@@ -22,7 +20,7 @@ public class JumpState : PlayerMovementState
         animator.SetBool("IsJumping", false);
     }
 
-    public override void Tick(StateMachine machine)
+    protected override void PerformeTransition(StateMachine machine)
     {
         HandleMovement();
 
@@ -33,6 +31,11 @@ public class JumpState : PlayerMovementState
         // Si le personnage est en redescente il passe à l'état FallState
         if (playerMovement.IsFalling())
             machine.ToMovementState(machine.fallState);
+
+        if(playerMovement.Walled && JumpKeyPressed)
+        {
+            machine.ToMovementState(machine.wallJumpState);
+        }
 
         if(DashKeyPressed)
         {

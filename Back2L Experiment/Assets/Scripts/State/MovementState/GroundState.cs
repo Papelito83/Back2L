@@ -17,12 +17,7 @@ class GroundState : PlayerMovementState
         Blink = BlinkEye();
     }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
-    }
-
-    public override void Tick(StateMachine machine)
+    protected override void PerformeTransition(StateMachine machine)
     {
         HandleMovement();
 

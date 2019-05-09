@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PhysicsObject physic;
 
+    private float wallSlideMaxSpeed = -2f;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
 
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         moveSpeed = 5.0f;
-        jumpSpeed = 10.0f;
+        jumpSpeed = 15.0f;
     }
 
     private void Start()
@@ -80,6 +82,28 @@ public class PlayerMovement : MonoBehaviour
         if (flipSprite)
         {
             spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
+    }
+
+    public void WallSlide()
+    {
+        if(Walled)
+        {
+            if(physic.velocity.y < 0)
+            {
+                physic.velocity.y = wallSlideMaxSpeed;
+            }
+        }
+    }
+
+    public void WallJump()
+    {
+        if (Walled)
+        {
+            Vector2 moveVector = physic.currentWallNormal * moveSpeed;
+            moveVector.y = jumpSpeed;
+
+            physic.targetVelocity = moveVector;
         }
     }
 }
