@@ -35,13 +35,17 @@ public abstract class PlayerMovementState : IState
         DashKeyPressed = false;
     }
 
-    public virtual void OnEnter()
-    {
-        ResetInput();
-    }
+    public virtual void OnEnter() { }
     public virtual void OnExit() { }
 
-    public abstract void Tick(StateMachine machine);
+    public void Tick(StateMachine machine)
+    {
+        PerformeTransition(machine);
+
+        ResetInput();
+    }
+
+    protected abstract void PerformeTransition(StateMachine machine);
 
     protected void HandleMovement()
     {

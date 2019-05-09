@@ -11,6 +11,8 @@ public class PhysicsObject : MonoBehaviour
     public bool grounded { get; private set; }
     public bool walled { get; private set; }
 
+    public Vector2 currentWallNormal;
+
     [HideInInspector] public Vector2 targetVelocity;
     [HideInInspector] public Vector2 velocity;
     private Vector2 groundNormal;
@@ -93,6 +95,7 @@ public class PhysicsObject : MonoBehaviour
                 if (Mathf.Abs(currentNormal.x) > 0)
                 {
                     walled = true;
+                    currentWallNormal = currentNormal;
                 }
 
                 if (currentNormal.y > minGroundNormalY)

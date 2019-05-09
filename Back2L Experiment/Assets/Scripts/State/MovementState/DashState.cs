@@ -13,12 +13,7 @@ class DashState : PlayerMovementState
         this.dash = dash;
     }
 
-    public override void OnEnter()
-    {
-        base.OnEnter();
-    }
-
-    public override void Tick(StateMachine machine)
+    protected override void PerformeTransition(StateMachine machine)
     {
         dash.Started();
         if (dash.Ended())
