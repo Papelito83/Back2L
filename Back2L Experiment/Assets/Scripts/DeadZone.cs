@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    public RespawnManager respawnManager;
+    [SerializeField]
+    private RespawnManager respawnManager;
+
+    public void Start()
+    {
+        respawnManager = FindObjectOfType<RespawnManager>();
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
