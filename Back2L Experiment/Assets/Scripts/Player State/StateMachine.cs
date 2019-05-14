@@ -8,24 +8,23 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     private PlayerMovement playerMovement;
+    private PlayerAttack playerAttack;
 
     private IState currentMovementState;
-    private IState currentAttackState;
-
-    public IState meleeAttackState { get; private set; }
-    public IState noAttackState { get; private set; }
 
     public IState groundState { get; private set; }
     public IState fallState { get; private set; }
     public IState dashState { get; private set; }
     public IState jumpState { get; private set; }
     public IState ledgeGrabState { get; private set; }
-    public IState wallJumpState { get; private set; }
+
+    //TESST
+    public IState attackState { get; private set; }
+
+    // public IState wallJumpState { get; private set; }
 
     public void Start()
     {
-        PlayerAttack playerAttack;
-
         Dash dash = GetComponent<Dash>();
         LedgeDetector ledgeDetector = GetComponent<LedgeDetector>();
         LedgeGrab ledgeGrabAbility = GetComponent<LedgeGrab>();
@@ -33,29 +32,29 @@ public class StateMachine : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
 
-        groundState = new GroundState(playerMovement);
+        groundState = new GroundState(playerMovement, playerAttack);
         fallState = new FallState(playerMovement, ledgeDetector, ledgeGrabAbility);
         dashState = new DashState(playerMovement, dash);
         jumpState = new JumpState(playerMovement);
         ledgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
-        wallJumpState = new WallJumpState(playerMovement);
 
-        meleeAttackState = new MeleeAttackState(playerAttack);
-        noAttackState = new NoAttackState(playerAttack);
+        //TEST
+        attackState = new AttackState(playerMovement, playerAttack);
+
+        // wallJumpState = new WallJumpState(playerMovement);
 
         currentMovementState = groundState;
-        currentAttackState = noAttackState;
     }
 
     public void Update()
     {
         currentMovementState.HandleInput();
-        currentAttackState.HandleInput();
     }
 
     public void FixedUpdate()
     {
         name = currentMovementState.ToString();
+
         currentMovementState.Tick(this);
     }
 
@@ -64,13 +63,6 @@ public class StateMachine : MonoBehaviour
         currentMovementState.OnExit();
         currentMovementState = nextMovementState;
         currentMovementState.OnEnter();
-    }
-
-    public void ToAttackState(IState nextAttackState)
-    {
-        currentAttackState.OnExit();
-        currentAttackState = nextAttackState;
-        currentAttackState.OnEnter();
     }
 }
 

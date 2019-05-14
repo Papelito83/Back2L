@@ -8,11 +8,16 @@ using UnityEngine;
 
 class GroundState : PlayerMovementState
 {
+    // TEST
+    private PlayerAttack playerAttack;
+
     private Animator animator;
     private Action Blink;
 
-    public GroundState(PlayerMovement playerMovement) : base(playerMovement)
+    public GroundState(PlayerMovement playerMovement, PlayerAttack playerAttack) : base(playerMovement)
     {
+        this.playerAttack = playerAttack;
+
         animator = playerMovement.GetComponent<Animator>();
         Blink = BlinkEye();
     }
@@ -20,6 +25,11 @@ class GroundState : PlayerMovementState
     protected override void PerformeTransition(StateMachine machine)
     {
         HandleMovement();
+
+        if (playerAttack.CanAttack() && attackKeyPressed)
+        {
+            machine.ToMovementState(machine.attackState);
+        }
 
         if (JumpKeyPressed && playerMovement.Grounded)
         {

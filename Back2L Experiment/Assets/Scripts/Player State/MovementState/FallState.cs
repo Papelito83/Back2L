@@ -40,18 +40,19 @@ class FallState : PlayerMovementState
             machine.ToMovementState(machine.ledgeGrabState);
         }
 
-        if (playerMovement.Walled && JumpKeyPressed)
-        {
-            machine.ToMovementState(machine.wallJumpState);
-        }
-
         if (DashKeyPressed)
         {
             var dash = playerMovement.GetComponent<Dash>();
 
-            if(!dash.OnCooldDown())
+            if (!dash.OnCooldDown())
                 machine.ToMovementState(machine.dashState);
         }
+
+        /*if (playerMovement.Walled && JumpKeyPressed)
+        {
+            machine.ToMovementState(machine.wallJumpState);
+        }
+        */
     }
 }
 

@@ -8,11 +8,13 @@ public abstract class PlayerMovementState : IState
     protected bool JumpKeyReleased;
     protected bool DashKeyPressed;
 
+    // TEST
+    protected bool attackKeyPressed; 
+
     public PlayerMovementState(PlayerMovement playerMovement)
     {
-        JumpKeyPressed = false;
-        JumpKeyReleased = false;
-        DashKeyPressed = false;
+        ResetInput();
+
         this.playerMovement = playerMovement;
     }
 
@@ -26,13 +28,19 @@ public abstract class PlayerMovementState : IState
 
         if (Input.GetButtonUp("Jump"))
             JumpKeyReleased = true;
-}
+
+        if (Input.GetKeyDown(KeyCode.C))
+            attackKeyPressed = true;
+    }
 
     protected void ResetInput()
     {
         JumpKeyPressed = false;
         JumpKeyReleased = false;
         DashKeyPressed = false;
+
+        // TEST
+        attackKeyPressed = false;
     }
 
     public virtual void OnEnter() { }
@@ -52,5 +60,12 @@ public abstract class PlayerMovementState : IState
         float x = Input.GetAxisRaw("Horizontal");
 
         playerMovement.MoveHorizontal(x);
+    }
+
+    protected void HandleMovement(float divideCoeff)
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+
+        playerMovement.MoveHorizontal(divideCoeff * x);
     }
 }

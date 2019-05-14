@@ -24,13 +24,23 @@ class LedgeGrabState : PlayerMovementState
 
     private Action<StateMachine> SelectExitAction()
     {
-        if (LeaveGoodSide())
+        if (LeaveGoodSide() || AttemptToFall())
             return FallTransition;
 
         if (Jump())
             return JumpTransition;
 
         return null;
+    }
+
+    private bool AttemptToFall()
+    {
+        float verticalDirection = Input.GetAxisRaw("Vertical");
+
+        if (verticalDirection < 0)
+            return true;
+
+        return false;
     }
 
     private bool LeaveGoodSide()

@@ -32,10 +32,11 @@ public class JumpState : PlayerMovementState
         if (playerMovement.IsFalling())
             machine.ToMovementState(machine.fallState);
 
-        if(playerMovement.Walled && JumpKeyPressed)
+        /*if(playerMovement.Walled && JumpKeyPressed)
         {
             machine.ToMovementState(machine.wallJumpState);
         }
+        */
 
         if(DashKeyPressed)
         {
