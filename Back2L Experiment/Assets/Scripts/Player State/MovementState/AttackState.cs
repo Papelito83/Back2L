@@ -19,11 +19,7 @@ public class AttackState : PlayerMovementState
         this.playerAttack = playerAttack;
         animator = playerMovement.GetComponent<Animator>();
 
-        foreach(var clip in animator.runtimeAnimatorController.animationClips)
-        {
-            if(clip.name == "Malgor Attack")
-                animClip = clip;
-        }
+        FindAttackClip();
     }
 
     public override void OnEnter()
@@ -43,6 +39,16 @@ public class AttackState : PlayerMovementState
 
         if (attackAnimTime <= 0f)
             machine.ToMovementState(machine.groundState);
+    }
+
+    private void FindAttackClip()
+    {
+        var runTimeAnimatorController = animator.runtimeAnimatorController;
+        foreach (var clip in runTimeAnimatorController.animationClips)
+        {
+            if (clip.name == "Malgor Attack")
+                animClip = clip;
+        }
     }
 }
 

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject Malghor;
-
     private SpriteRenderer spriteRenderer;
 
     private PhysicsObject physic;
@@ -58,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         physic.targetVelocity.y = jumpSpeed;
-        Malghor.GetComponent<malghor_sound>().jumpSound();
+        GetComponent<malghor_sound>().jumpSound();
     }
 
     public void JumpOff()

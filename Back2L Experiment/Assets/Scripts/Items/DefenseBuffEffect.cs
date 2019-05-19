@@ -5,31 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Shiva.Stats;
-using UnityEngine;
 
-public class DefenseBuffEffect
+public class DefenseBuffEffect : IBuffEffect
 {
-    private float defenseBuff;
+    private readonly float defenseBuff;
 
     public DefenseBuffEffect(int defenseBuff)
     {
         this.defenseBuff = defenseBuff;
     }
 
-    public void ExecuteEffect(Transform target)
+    public void ExecuteEffect(IMutableStat stat)
     {
         StatModifier modifier = new StatModifier(defenseBuff, this);
-        PlayerStats playerStats = target.GetComponent<PlayerStats>();
 
-        PlayerStat defenseStat = playerStats.defenseStat;
-        if (!defenseStat.IsModified)
+        if (!stat.IsModified)
         {
-            defenseStat.AddModifier(modifier);
+            stat.AddModifier(modifier);
         }
         else
         {
-            defenseStat.RemoveAllModifierFromSource(this);
-            defenseStat.AddModifier(modifier);
+            stat.RemoveAllModifierFromSource(this);
+            stat.AddModifier(modifier);
         }
     }
 }
