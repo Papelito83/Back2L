@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (Dead())
             Kill();
 
-        //Move();
+        Move();
     }
 
     private void Move()
