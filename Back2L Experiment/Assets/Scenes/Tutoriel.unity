@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 619071558}
   - component: {fileID: 619071557}
   - component: {fileID: 619071556}
+  - component: {fileID: 619071559}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -188,12 +189,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619071555}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.48327857, z: 0}
+  m_LocalPosition: {x: -8, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
-  m_Father: {fileID: 773434696}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619071559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619071555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9228110db0ae26144b355bf6f7f2bc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interpVelocity: 0
+  minDistance: 0
+  followDistance: 0
+  target: {fileID: 773434684}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &659001389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,10 +2118,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773434684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.21, y: 2.03, z: 0}
+  m_LocalPosition: {x: -5.5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children:
-  - {fileID: 619071558}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7053,7 +7070,7 @@ Tilemap:
   - first: {x: 48, y: 3, z: 0}
     second:
       m_TileIndex: 2
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -12516,12 +12533,12 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300084, guid: b42754f262164f74191c86d567ee95ab, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300086, guid: b42754f262164f74191c86d567ee95ab, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300086, guid: b42754f262164f74191c86d567ee95ab, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300084, guid: b42754f262164f74191c86d567ee95ab, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300082, guid: b42754f262164f74191c86d567ee95ab, type: 3}
   - m_RefCount: 7
