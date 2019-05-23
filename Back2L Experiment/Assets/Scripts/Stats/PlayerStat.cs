@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Shiva.Stats
 {
     [Serializable]
-    public class PlayerStat
+    public class PlayerStat : IMutableStat
     {
         private float baseValue;        
         private float value;
@@ -34,7 +34,7 @@ namespace Shiva.Stats
         }
 
         private readonly List<StatModifier> statModifiers;
-        private readonly ReadOnlyCollection<StatModifier> StatModifiers;
+        private readonly IEnumerable<StatModifier> StatModifiers;
 
         public PlayerStat()
         {
@@ -69,7 +69,8 @@ namespace Shiva.Stats
 
             for (int i = statModifiers.Count - 1; i >= 0; i--)
             {
-                if (StatModifiers[i].Source == source)
+                var element = StatModifiers.ElementAt(i);
+                if(element.Source == source)
                 {
                     isDirty = true;
                     didRemove = true;
@@ -85,7 +86,8 @@ namespace Shiva.Stats
 
             for(int i=0;i<statModifiers.Count; i++)
             {
-                finalValue = StatModifiers[i].ModifyStatValue(finalValue);
+                var element = StatModifiers.ElementAt(i);
+                finalValue = element.ModifyStatValue(finalValue);
             }
 
             return (int)Math.Round(finalValue, 4);

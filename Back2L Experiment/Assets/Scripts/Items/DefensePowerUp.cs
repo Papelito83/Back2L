@@ -20,7 +20,11 @@ class DefensePowerUp : MonoBehaviour
 
     private void ExecuteEffect(Transform target)
     {
-        defenseEffect.ExecuteEffect(target);
+        var playerStat = target.GetComponent<PlayerStats>();
+        var defenseStat = playerStat.DefenseStat;
+
+        defenseEffect.ExecuteEffect(defenseStat);
+
         Destroy(gameObject);
     }
 
@@ -28,7 +32,7 @@ class DefensePowerUp : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            Transform target = collision.GetComponent<Transform>();
+            var target = collision.GetComponent<Transform>();
             ExecuteEffect(target);          
         }           
     }

@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         physic.targetVelocity.y = jumpSpeed;
+        GetComponent<malghor_sound>().jumpSound();
     }
 
     public void JumpOff()

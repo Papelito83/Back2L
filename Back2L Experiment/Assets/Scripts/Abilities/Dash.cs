@@ -56,11 +56,14 @@ public class Dash : MonoBehaviour
     {
         if (IsActive)
         {
+            playerPhysics.EnableGravity = false;
             playerPhysics.StopVerticalVelocity();
+
             if (dashTimeLeft <= 0)
             {
                 IsActive = false;
                 dashCoolDownLeft = dashCoolDown;
+                playerPhysics.EnableGravity = true;
             }
             else
             {
