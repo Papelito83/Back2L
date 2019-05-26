@@ -4,10 +4,10 @@ using UnityEngine;
 class FallState : PlayerMovementState
 {
     private Animator animator;
-    private LedgeDetector ledgeDetector;
+    private CharacterLedgeDetector ledgeDetector;
     private LedgeGrab ledgeGrabAbility;
 
-    public FallState(PlayerMovement playerMovement, LedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
+    public FallState(PlayerMovement playerMovement, CharacterLedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
         animator = playerMovement.GetComponent<Animator>();
 
@@ -36,7 +36,8 @@ class FallState : PlayerMovementState
 
         if (ledgeDetector.DetectWallLedge())
         {
-            ledgeGrabAbility.Grab(ledgeDetector.GetWallCollider());
+            var collider = ledgeDetector.GetWallCollider();
+            ledgeGrabAbility.Grab(collider);
             machine.ToMovementState(machine.ledgeGrabState);
         }
 
@@ -48,11 +49,11 @@ class FallState : PlayerMovementState
                 machine.ToMovementState(machine.dashState);
         }
 
-        /*if (playerMovement.Walled && JumpKeyPressed)
+        if (playerMovement.Walled && JumpKeyPressed)
         {
             machine.ToMovementState(machine.wallJumpState);
         }
-        */
+        
     }
 }
 

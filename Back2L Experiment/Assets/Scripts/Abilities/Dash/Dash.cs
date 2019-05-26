@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovement), typeof(PhysicsObject))]
 public class Dash : MonoBehaviour
 {
     private PlayerMovement playerMovement;

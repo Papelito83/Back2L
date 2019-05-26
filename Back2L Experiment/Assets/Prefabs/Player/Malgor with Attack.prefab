@@ -13,11 +13,13 @@ GameObject:
   - component: {fileID: 1780409381008025368}
   - component: {fileID: 4347745848148010862}
   - component: {fileID: 4347745848148010863}
+  - component: {fileID: 3644496769319126285}
   - component: {fileID: 4347745848148010839}
   - component: {fileID: 4347745848148010856}
   - component: {fileID: 4347745848148010857}
   - component: {fileID: 4347745848148010858}
-  - component: {fileID: 4347745848148010833}
+  - component: {fileID: 4498539285983720384}
+  - component: {fileID: 1549683400784328570}
   - component: {fileID: 4347745848148010834}
   - component: {fileID: 4347745848148010835}
   - component: {fileID: 4347745848148010832}
@@ -158,6 +160,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3644496769319126285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347745848148010859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e81fb9a62ed454a814c30fcaf012d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Saut: {fileID: 0}
+  Attaque: {fileID: 0}
+  Marche: {fileID: 0}
+  sourceSon: {fileID: 8875707348976113635}
 --- !u!114 &4347745848148010839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225225f692e65ac4cb4fd2a31411db85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Malghor: {fileID: 0}
   moveSpeed: 0
   jumpSpeed: 15
 --- !u!114 &4347745848148010858
@@ -217,7 +234,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4e3ba5e8190ac4d894d9ff2fd6b6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4347745848148010833
+--- !u!114 &4498539285983720384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347745848148010859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835852bb30bf2434fab1494b4432a8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1549683400784328570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

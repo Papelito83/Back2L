@@ -21,18 +21,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
         Health = MaxHealthStat.Value;
     }
 
-
-    public void Start()
-    {
-    
-    }
-
     public void Update()
     {
         Debug.Log("Vie : " + Health);
         Debug.Log("Damage : " + DamageStat.Value);
         Debug.Log("Defense : " + DefenseStat.Value);
-
     }
 
     public void TakeDamage(float damage)

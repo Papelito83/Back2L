@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class LedgeGrab : MonoBehaviour
+[RequireComponent(typeof(PlayerMovement), typeof(PhysicsObject))]
+public class LedgeGrab : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     private PhysicsObject playerPhysics;
@@ -15,7 +16,7 @@ class LedgeGrab : MonoBehaviour
     public float coolDownBeforeAction = 1f;
     public float coolDownLeft;
 
-    private void Start()
+    private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerPhysics = GetComponent<PhysicsObject>();
@@ -48,31 +49,5 @@ class LedgeGrab : MonoBehaviour
     {
         playerPhysics.EnableGravity = true;
     }
-
-    /*public void Climb()
-    {
-        UnGrab();
-
-        SetPlayerOnPlatform();
-
-        // and Animation logic
-    }
-    */
-
-    /*private void SetPlayerOnPlatform()
-    {
-        float horizontalCorrection, verticalCorrection;
-        Collider2D PlayerMovementCollider = playerMovement.GetComponent<BoxCollider2D>();
-
-        verticalCorrection = colliderLedgeOwner.bounds.max.y - PlayerMovementCollider.bounds.min.y;
-
-        horizontalCorrection = playerMovement.DirectionFlipped() ? colliderLedgeOwner.bounds.max.x - PlayerMovementCollider.bounds.max.x
-                                                                 : colliderLedgeOwner.bounds.min.x - PlayerMovementCollider.bounds.min.x;
-
-        Vector3 correction = new Vector3(horizontalCorrection, verticalCorrection);
-
-        playerMovement.transform.position += correction;
-    }
-    */
 }
 

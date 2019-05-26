@@ -21,12 +21,12 @@ public class StateMachine : MonoBehaviour
     //TESST
     public IState attackState { get; private set; }
 
-    // public IState wallJumpState { get; private set; }
+    public IState wallJumpState { get; private set; }
 
     public void Start()
     {
         Dash dash = GetComponent<Dash>();
-        LedgeDetector ledgeDetector = GetComponent<LedgeDetector>();
+        CharacterLedgeDetector ledgeDetector = GetComponent<CharacterLedgeDetector>();
         LedgeGrab ledgeGrabAbility = GetComponent<LedgeGrab>();
 
         playerMovement = GetComponent<PlayerMovement>();
@@ -41,7 +41,7 @@ public class StateMachine : MonoBehaviour
         //TEST
         attackState = new AttackState(playerMovement, playerAttack);
 
-        // wallJumpState = new WallJumpState(playerMovement);
+        wallJumpState = new WallJumpState(playerMovement);
 
         currentMovementState = groundState;
     }

@@ -2,38 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class malghor_sound : MonoBehaviour
+public class MalgorSound : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
     public AudioClip Saut;
     public AudioClip Attaque;
     public AudioClip Marche;
     public AudioSource sourceSon;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void jumpSound()
+    public void PlayJumpSound()
     {
         sourceSon.PlayOneShot(Saut);
     }
 
-    void attackSound()
+    void PlayAttackSound()
     {
         sourceSon.PlayOneShot(Attaque);
     }
 
-    void walkSound()
+    void PlayWalkSound()
     {
         sourceSon.PlayOneShot(Marche);
     }
