@@ -3,7 +3,7 @@ L̓҉̜̦̲̗̬͕ẽ̝͈͈̌ͭ͑ͮ͂ ̫͙̲̼p̘̯̭͔̤̞̒͛̎̈̀͢ȓͬ͋ͫ�
 
 ## Conception - UML
 
-A refaire
+A refaire!
 
 ## Gestion de projet
 
