@@ -208,7 +208,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79ecbfcc2b01f544986e586ead812be7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.546
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -221,7 +221,7 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 0
+  BypassListenerEffects: 1
   BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
@@ -470,7 +470,8 @@ PrefabInstance:
       propertyPath: Malghor
       value: 
       objectReference: {fileID: 2116783889}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3644496769319126285, guid: 6d63b31c2e7bee54ea24ac10e05a6225, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6d63b31c2e7bee54ea24ac10e05a6225, type: 3}
 --- !u!1001 &1437485847
 PrefabInstance:
@@ -864,22 +865,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1305953339}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2116783890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116783889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e81fb9a62ed454a814c30fcaf012d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Saut: {fileID: 8300000, guid: 1ec87f3c57d761b43ae6d057b7578c0e, type: 3}
-  Attaque: {fileID: 8300000, guid: 1ec87f3c57d761b43ae6d057b7578c0e, type: 3}
-  Marche: {fileID: 8300000, guid: 84ce08c81872ab24e9d3948165b0768e, type: 3}
-  sourceSon: {fileID: 2116783891}
 --- !u!82 &2116783891 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8875707348976113635, guid: 6d63b31c2e7bee54ea24ac10e05a6225,
