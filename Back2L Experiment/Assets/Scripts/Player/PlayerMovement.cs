@@ -1,11 +1,19 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PhysicsObject))]
 public class PlayerMovement : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
-    private PhysicsObject physic;
+    public PhysicsObject physic;
+
+    // TEST
+    private LayerMask platformOneWayLayer;
+    private LayerMask playerLayer;
+    private bool platformCoroutineIsRunning;
+
 
     private float wallSlideMaxSpeed = -2f;
 
@@ -26,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = 5.0f;
         jumpSpeed = 15.0f;
+
+        platformOneWayLayer = LayerMask.NameToLayer("OneWayPlatform");
+        playerLayer = LayerMask.NameToLayer("Player");
+        platformCoroutineIsRunning = false;
     }
 
     private void Start()
@@ -56,7 +68,11 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         physic.targetVelocity.y = jumpSpeed;
-        GetComponent<malghor_sound>().jumpSound();
+    }
+
+    public void CustomJump(float jumpSpeed)
+    {
+        physic.targetVelocity.y = jumpSpeed;
     }
 
     public void JumpOff()
@@ -94,17 +110,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 physic.velocity.y = wallSlideMaxSpeed;
             }
-        }
-    }
-
-    public void WallJump()
-    {
-        if (Walled)
-        {
-            Vector2 moveVector = physic.currentWallNormal * moveSpeed;
-            moveVector.y = jumpSpeed;
-
-            physic.targetVelocity = moveVector;
         }
     }
 }
