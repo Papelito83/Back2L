@@ -1,22 +1,21 @@
 fileFormatVersion: 2
-guid: a0c9c7ab350d5bd4584998bedf572f0f
+guid: 35886e6b46399de47ad4af15ce0ab53b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Malgor_Spritesheet_1.4_0
-    21300002: Malgor_Spritesheet_1.4_1
-    21300004: Malgor_Spritesheet_1.4_2
-    21300006: Malgor_Spritesheet_1.4_3
-    21300008: Malgor_Spritesheet_1.4_4
-    21300010: Malgor_Spritesheet_1.4_5
-    21300012: Malgor_Spritesheet_1.4_6
-    21300014: Malgor_Spritesheet_1.4_7
-    21300016: Malgor_Spritesheet_1.4_8
-    21300018: Malgor_Spritesheet_1.4_9
-    21300020: Malgor_Spritesheet_1.4_10
-    21300022: Malgor_Spritesheet_1.4_11
-    21300024: Malgor_Spritesheet_1.4_12
-    21300026: Malgor_Spritesheet_1.4_13
-    21300028: Malgor_Spritesheet_1.4_14
+    21300000: sanglierAnim_0
+    21300002: sanglierAnim_1
+    21300004: sanglierAnim_2
+    21300006: sanglierAnim_3
+    21300008: sanglierAnim_4
+    21300010: sanglierAnim_5
+    21300012: sanglierAnim_6
+    21300014: sanglierAnim_7
+    21300016: sanglierAnim_8
+    21300018: sanglierAnim_9
+    21300020: sanglierAnim_10
+    21300022: sanglierAnim_11
+    21300024: sanglierAnim_12
+    21300026: sanglierAnim_13
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -60,7 +59,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,7 +77,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -89,18 +88,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,281 +98,281 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_0
+      name: sanglierAnim_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        y: 72
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 770154809cb539442b3ab31534c63ad8
+      spriteID: e8c9abeabb85a4749b3549a6898fbc36
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_1
+      name: sanglierAnim_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        x: 36
+        y: 72
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52320e5cca21ed545a8bfdae4560ac6e
+      spriteID: 75033bebae940c04fb7142fcf737014c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_2
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2df386a66001b83408290343c771b8d5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_3
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f2b1e12386e9cf4f88e35b62f762dca
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_4
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4306425a2c447eb4983e7641508c013b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_5
-      rect:
-        serializedVersion: 2
-        x: 175
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d03697d7906d834a9c33094e939d3f7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_6
-      rect:
-        serializedVersion: 2
-        x: 210
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9428fe6e91fda040a8c21c7bd76ee88
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_7
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9cd43dd679356745adf27d86a6970e6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_8
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 225
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 422f97fe48d60ed4a85a7ba80fe7a370
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_9
+      name: sanglierAnim_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        y: 48
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ede756754b5859f4ba46d21d04e91d62
+      spriteID: 52fccb6e8451b61439b9b4a6f06037bc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_10
+      name: sanglierAnim_3
       rect:
         serializedVersion: 2
-        x: 35
-        y: 200
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        x: 36
+        y: 48
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb282836a2b1a11419fddef779b930c0
+      spriteID: a7e8b54e8730d94479e8348448d5e08b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_11
+      name: sanglierAnim_4
       rect:
         serializedVersion: 2
-        x: 70
-        y: 200
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        x: 72
+        y: 48
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 506f8ddc24e1918439e964d34f8698f2
+      spriteID: 0ba1d0481586b84449ea24b2d4f2af31
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_12
+      name: sanglierAnim_5
       rect:
         serializedVersion: 2
-        x: 105
-        y: 200
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        x: 108
+        y: 48
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25a8b0d224616d14196b784f80a35af3
+      spriteID: df235a0710e945a4c9d62ac0c5bfcbfc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Malgor_Spritesheet_1.4_13
+      name: sanglierAnim_6
       rect:
         serializedVersion: 2
-        x: 140
-        y: 200
-        width: 35
-        height: 25
-      alignment: 9
-      pivot: {x: 0.8, y: 0.3}
+        x: 0
+        y: 24
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3d5ed1a62147ae4e92434c856eb2dce
+      spriteID: a45bf5eb421a2944e89132c34eab16a3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_7
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f32fd9466424a449cd751536203c94
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_8
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 24
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec373dc85e932f4ab6ff91813edee34
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_9
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 24
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019780f8bf1297044b461c28d8112706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ceadfe06f8e6449bafd979e2e34fa9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_11
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6af9967d982118408d1052d697c8597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_12
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10182995c8da54a43aba1b29662221de
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sanglierAnim_13
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd2dc9312c2681e4e89992585b6c6565
       vertices: []
       indices: 
       edges: []
@@ -392,7 +380,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 22c4bff0949736947b15b028f3fb2df4
+    spriteID: 619809054066ac245a90bb4e18f3750f
     vertices: []
     indices: 
     edges: []
