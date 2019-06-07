@@ -203,7 +203,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599390503}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79ecbfcc2b01f544986e586ead812be7, type: 3}
@@ -304,7 +304,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 30725324e63da2e4a88334f76c33e79a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.685
+  m_Volume: 0.323
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -395,6 +395,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6484582956235082336, guid: 6d63b31c2e7bee54ea24ac10e05a6225,
+        type: 3}
+      propertyPath: Saut
+      value: 
+      objectReference: {fileID: 8300000, guid: 12c6c14b1dc088e45a63e0906bf98275, type: 3}
     - target: {fileID: 4347745848148010859, guid: 6d63b31c2e7bee54ea24ac10e05a6225,
         type: 3}
       propertyPath: m_Name
@@ -470,6 +475,11 @@ PrefabInstance:
       propertyPath: Malghor
       value: 
       objectReference: {fileID: 2116783889}
+    - target: {fileID: 8875707348976113635, guid: 6d63b31c2e7bee54ea24ac10e05a6225,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.547
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3644496769319126285, guid: 6d63b31c2e7bee54ea24ac10e05a6225, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6d63b31c2e7bee54ea24ac10e05a6225, type: 3}
