@@ -35,3 +35,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Back2L Experiment/ProjectSettings/ProjectVersion.txt
+
+# Other
+*.bak*
+*.orig*
