@@ -19,8 +19,8 @@ TagManager:
   - Ground
   - Player
   - PickUp
-  - Sky
-  - Mountain
+  - OneWayPlatform
+  - 
   - 
   - 
   - 

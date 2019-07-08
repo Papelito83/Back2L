@@ -3,30 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 
 public class WallJumpState : PlayerMovementState
 {
+    private float wallJumpTime = 0.2f;
+    private float wallJumpLeft;
+
+    float direction;
+    bool started = false;
+
+
     public WallJumpState(PlayerMovement playerMovement) : base(playerMovement)
     {
 
     }
 
     public override void OnEnter()
-    {
+    {       
         base.OnEnter();
 
-        playerMovement.WallJump();
+        var playerPhysic = playerMovement.physic;
+        var currentWallNormal = playerPhysic.currentWallNormal;
+
+        playerMovement.CustomJump(12.0f);
+        wallJumpLeft = wallJumpTime;
+
+        direction = currentWallNormal.x;
+
+        started = true;
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    public override void OnExit()
     {
-        HandleMovement();
+        playerMovement.physic.StopVerticalVelocity();
 
-        if (playerMovement.Grounded)
-            machine.ToMovementState(machine.groundState);
+        started = false;
 
-        if (playerMovement.IsFalling())
-            machine.ToMovementState(machine.fallState);
+        base.OnExit();
+    }
+
+    protected override void PerformTransition(StateMachine machine)
+    {
+        if (started)
+        {
+            playerMovement.MoveHorizontal(direction);
+
+            wallJumpLeft -= Time.deltaTime;
+        }
+
+        if (playerMovement.Walled && JumpKeyPressed)
+            machine.ToMovementState(this);
+
+        if (wallJumpLeft <= 0f)
+        {
+            if (playerMovement.Grounded)
+                machine.ToMovementState(machine.GroundState);
+
+            if (playerMovement.IsFalling())
+                machine.ToMovementState(machine.FallState);
+        }
     }
 }

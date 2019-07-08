@@ -12,38 +12,38 @@ public class StateMachine : MonoBehaviour
 
     private IState currentMovementState;
 
-    public IState groundState { get; private set; }
-    public IState fallState { get; private set; }
-    public IState dashState { get; private set; }
-    public IState jumpState { get; private set; }
-    public IState ledgeGrabState { get; private set; }
+    public IState GroundState { get; private set; }
+    public IState FallState { get; private set; }
+    public IState DashState { get; private set; }
+    public IState JumpState { get; private set; }
+    public IState LedgeGrabState { get; private set; }
 
     //TESST
-    public IState attackState { get; private set; }
+    public IState AttackState { get; private set; }
 
-    // public IState wallJumpState { get; private set; }
+    public IState WallJumpState { get; private set; }
 
     public void Start()
     {
-        Dash dash = GetComponent<Dash>();
-        LedgeDetector ledgeDetector = GetComponent<LedgeDetector>();
-        LedgeGrab ledgeGrabAbility = GetComponent<LedgeGrab>();
+        var dash = GetComponent<Dash>();
+        var ledgeDetector = GetComponent<CharacterLedgeDetector>();
+        var ledgeGrabAbility = GetComponent<LedgeGrab>();
 
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
 
-        groundState = new GroundState(playerMovement, playerAttack);
-        fallState = new FallState(playerMovement, ledgeDetector, ledgeGrabAbility);
-        dashState = new DashState(playerMovement, dash);
-        jumpState = new JumpState(playerMovement);
-        ledgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
+        GroundState = new GroundState(playerMovement, playerAttack);
+        FallState = new FallState(playerMovement, ledgeDetector, ledgeGrabAbility);
+        DashState = new DashState(playerMovement, dash);
+        JumpState = new JumpState(playerMovement);
+        LedgeGrabState = new LedgeGrabState(playerMovement, ledgeGrabAbility);
 
         //TEST
-        attackState = new AttackState(playerMovement, playerAttack);
+        AttackState = new AttackState(playerMovement, playerAttack);
 
-        // wallJumpState = new WallJumpState(playerMovement);
+        WallJumpState = new WallJumpState(playerMovement);
 
-        currentMovementState = groundState;
+        currentMovementState = GroundState;
     }
 
     public void Update()

@@ -4,10 +4,10 @@ using UnityEngine;
 class FallState : PlayerMovementState
 {
     private Animator animator;
-    private LedgeDetector ledgeDetector;
+    private CharacterLedgeDetector ledgeDetector;
     private LedgeGrab ledgeGrabAbility;
 
-    public FallState(PlayerMovement playerMovement, LedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
+    public FallState(PlayerMovement playerMovement, CharacterLedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
         animator = playerMovement.GetComponent<Animator>();
 
@@ -25,19 +25,20 @@ class FallState : PlayerMovementState
         animator.SetBool("IsFalling", false);
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
         HandleMovement();
 
         playerMovement.WallSlide();
 
         if (playerMovement.Grounded)
-            machine.ToMovementState(machine.groundState);
+            machine.ToMovementState(machine.GroundState);
 
         if (ledgeDetector.DetectWallLedge())
         {
-            ledgeGrabAbility.Grab(ledgeDetector.GetWallCollider());
-            machine.ToMovementState(machine.ledgeGrabState);
+            var collider = ledgeDetector.GetWallCollider();
+            ledgeGrabAbility.Grab(collider);
+            machine.ToMovementState(machine.LedgeGrabState);
         }
 
         if (DashKeyPressed)
@@ -45,14 +46,14 @@ class FallState : PlayerMovementState
             var dash = playerMovement.GetComponent<Dash>();
 
             if (!dash.OnCooldDown())
-                machine.ToMovementState(machine.dashState);
+                machine.ToMovementState(machine.DashState);
         }
 
-        /*if (playerMovement.Walled && JumpKeyPressed)
+        if (playerMovement.Walled && JumpKeyPressed)
         {
-            machine.ToMovementState(machine.wallJumpState);
+            machine.ToMovementState(machine.WallJumpState);
         }
-        */
+        
     }
 }
 

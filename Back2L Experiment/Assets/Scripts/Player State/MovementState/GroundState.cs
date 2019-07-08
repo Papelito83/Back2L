@@ -22,22 +22,22 @@ class GroundState : PlayerMovementState
         Blink = BlinkEye();
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
         HandleMovement();
 
         if (playerAttack.CanAttack() && attackKeyPressed)
         {
-            machine.ToMovementState(machine.attackState);
+            machine.ToMovementState(machine.AttackState);
         }
 
         if (JumpKeyPressed && playerMovement.Grounded)
         {
-            machine.ToMovementState(machine.jumpState);
+            machine.ToMovementState(machine.JumpState);
         }
         else if (!playerMovement.Grounded)
         {
-            machine.ToMovementState(machine.fallState);
+            machine.ToMovementState(machine.FallState);
         }
 
         if (DashKeyPressed)
@@ -45,7 +45,7 @@ class GroundState : PlayerMovementState
             var dash = playerMovement.GetComponent<Dash>();
 
             if (!dash.OnCooldDown())
-                machine.ToMovementState(machine.dashState);
+                machine.ToMovementState(machine.DashState);
             else
                 DashKeyPressed = false;
         }

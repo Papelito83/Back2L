@@ -6,6 +6,8 @@ using System.Collections;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
+    public event EventHandler OnTakeDamage;
+
     public float Health { get; private set; }
 
     public IStat MaxHealthStat { get; private set; }
@@ -14,17 +16,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Awake()
     {
-        MaxHealthStat = new PlayerStat(100);
+        MaxHealthStat = new PlayerStat(3);
         DamageStat = new PlayerStat(10);
         DefenseStat = new PlayerStat(0);
 
         Health = MaxHealthStat.Value;
-    }
-
-
-    public void Start()
-    {
-    
     }
 
     public void Update()
@@ -32,15 +28,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
         Debug.Log("Vie : " + Health);
         Debug.Log("Damage : " + DamageStat.Value);
         Debug.Log("Defense : " + DefenseStat.Value);
-
     }
 
     public void TakeDamage(float damage)
     {
-        if (!Dead())
-        {
-            Health -= damage;
-        }
+        Health -= damage;
+
+        if (Dead())
+            Health = 0;
+
+        OnTakeDamage(this, EventArgs.Empty);
+        
     }
 
     public bool Dead()
