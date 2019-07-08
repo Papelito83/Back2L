@@ -34,21 +34,18 @@ public class RespawnManager : MonoBehaviour
 
     private void ChangeCurrentRespawn(RespawnPoint other)
     {
-        if (currentRespawn != other)
-        {
+        if (currentRespawn == other) return;
 
-            currentRespawn = other;
-            Debug.Log("Respawn point has changed : " + other.transform.position);
-        }      
+        currentRespawn = other;
+        Debug.Log("Respawn point has changed : " + other.transform.position);
     }
 
     private void RespawnPlayer()
     {
-        if(currentRespawn != null)
-        {
-            Vector3 respawnPosition = currentRespawn.transform.position;
+        if (currentRespawn == null) return;
 
-            player.transform.position = respawnPosition;
-        }
+        var respawnPosition = currentRespawn.transform.position;
+
+        player.transform.position = respawnPosition;
     }
 }

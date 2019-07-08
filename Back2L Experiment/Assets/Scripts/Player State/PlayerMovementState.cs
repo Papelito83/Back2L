@@ -48,12 +48,12 @@ public abstract class PlayerMovementState : IState
 
     public void Tick(StateMachine machine)
     {
-        PerformeTransition(machine);
+        PerformTransition(machine);
 
         ResetInput();
     }
 
-    protected abstract void PerformeTransition(StateMachine machine);
+    protected abstract void PerformTransition(StateMachine machine);
 
     protected void HandleMovement()
     {

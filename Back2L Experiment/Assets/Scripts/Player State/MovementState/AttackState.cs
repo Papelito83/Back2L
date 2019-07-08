@@ -31,14 +31,14 @@ public class AttackState : PlayerMovementState
         playerAttack.Execute();
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {       
         HandleMovement(0.3f);
 
         attackAnimTime -= Time.deltaTime;
 
         if (attackAnimTime <= 0f)
-            machine.ToMovementState(machine.groundState);
+            machine.ToMovementState(machine.GroundState);
     }
 
     private void FindAttackClip()

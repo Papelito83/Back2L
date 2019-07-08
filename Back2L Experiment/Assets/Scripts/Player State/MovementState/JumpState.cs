@@ -26,7 +26,7 @@ public class JumpState : PlayerMovementState
         animator.SetBool("IsJumping", false);
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
         HandleMovement();
 
@@ -36,14 +36,14 @@ public class JumpState : PlayerMovementState
 
         // Si le personnage est en redescente il passe à l'état FallState
         if (playerMovement.IsFalling())
-            machine.ToMovementState(machine.fallState);
+            machine.ToMovementState(machine.FallState);
 
         if(DashKeyPressed)
         {
             var dash = playerMovement.GetComponent<Dash>();
 
             if (!dash.OnCooldDown())
-                machine.ToMovementState(machine.dashState);
+                machine.ToMovementState(machine.DashState);
         }
     }
 }

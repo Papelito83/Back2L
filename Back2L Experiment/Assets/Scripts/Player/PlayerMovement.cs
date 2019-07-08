@@ -20,15 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
 
-    public bool Grounded
-    {
-        get { return physic.grounded; }
-    }
+    public bool Grounded => physic.grounded;
 
-    public bool Walled
-    {
-        get { return physic.walled; }
-    }
+    public bool Walled => physic.walled;
 
     private void Awake()
     {
@@ -48,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveHorizontal(float dir)
     {
-        Vector2 move = Vector2.zero;
+        var move = Vector2.zero;
 
         move.x = dir;
 

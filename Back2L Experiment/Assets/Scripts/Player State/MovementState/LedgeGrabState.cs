@@ -7,16 +7,16 @@ using UnityEngine;
 
 class LedgeGrabState : PlayerMovementState
 { 
-    private LedgeGrab ledgeGrabAbility;
+    private readonly LedgeGrab ledgeGrabAbility;
 
     public LedgeGrabState(PlayerMovement playerMovement, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
         this.ledgeGrabAbility = ledgeGrabAbility;
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
-        Action<StateMachine> ledgeGrabExitAction = SelectExitAction();
+        var ledgeGrabExitAction = SelectExitAction();
 
         if (!ledgeGrabAbility.OnCoolDown())
             ledgeGrabExitAction?.Invoke(machine); 
@@ -59,13 +59,13 @@ class LedgeGrabState : PlayerMovementState
     private void JumpTransition(StateMachine machine)
     {
         ledgeGrabAbility.UnGrab();
-        machine.ToMovementState(machine.jumpState);
+        machine.ToMovementState(machine.JumpState);
     }
 
     private void FallTransition(StateMachine machine)
     {
         ledgeGrabAbility.UnGrab();
-        machine.ToMovementState(machine.fallState);
+        machine.ToMovementState(machine.FallState);
     }
 
     private bool Jump()

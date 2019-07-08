@@ -9,18 +9,18 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
-    private float timeBtwAttack;
+    private readonly float timeBtwAttack;
 
     [SerializeField]
-    private Transform initialAttackPos;
+    private readonly Transform initialAttackPos;
     private Transform relativeAttackPos;
 
     private LayerMask whatIsEnemies;
 
     [SerializeField]
-    private float attackRadius;
+    private readonly float attackRadius;
     [SerializeField]
-    private int damage;
+    private readonly int damage;
 
     private PlayerMovement playerMovement;
     private Collider2D playerCollider;
@@ -46,9 +46,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void FlipAttackPos()
     {
-        Vector3 flipCenter = new Vector3(playerCollider.bounds.center.x, relativeAttackPos.position.y);
-        Vector3 difference = relativeAttackPos.position - flipCenter;
-        Vector3 newRelativePosition = relativeAttackPos.position - 2 * difference;
+        var position = relativeAttackPos.position;
+
+        var flipCenter = new Vector3(playerCollider.bounds.center.x, position.y);
+        var difference = position - flipCenter;
+        var newRelativePosition = position - 2 * difference;
 
         if (playerMovement.DirectionFlipped() && !attackPosFlipped)
         {
@@ -79,7 +81,7 @@ public class PlayerAttack : MonoBehaviour
             enemie.TakeDamage(damage);
         }
 
-        Invoke("ResetAttackFlag", timeBtwAttack);
+        Invoke(nameof(ResetAttackFlag), timeBtwAttack);
     }
 
     private void ResetAttackFlag()

@@ -44,7 +44,7 @@ public class WallJumpState : PlayerMovementState
         base.OnExit();
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
         if (started)
         {
@@ -59,10 +59,10 @@ public class WallJumpState : PlayerMovementState
         if (wallJumpLeft <= 0f)
         {
             if (playerMovement.Grounded)
-                machine.ToMovementState(machine.groundState);
+                machine.ToMovementState(machine.GroundState);
 
             if (playerMovement.IsFalling())
-                machine.ToMovementState(machine.fallState);
+                machine.ToMovementState(machine.FallState);
         }
     }
 }

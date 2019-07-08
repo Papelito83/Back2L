@@ -13,15 +13,15 @@ class DashState : PlayerMovementState
         this.dash = dash;
     }
 
-    protected override void PerformeTransition(StateMachine machine)
+    protected override void PerformTransition(StateMachine machine)
     {
         dash.Started();
         if (dash.Ended())
         {
             if (playerMovement.Grounded)
-                machine.ToMovementState(machine.groundState);
+                machine.ToMovementState(machine.GroundState);
             else
-                machine.ToMovementState(machine.fallState);
+                machine.ToMovementState(machine.FallState);
         }
     }
 }
