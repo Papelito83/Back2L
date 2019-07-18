@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -13,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField]
     private readonly Transform initialAttackPos;
+
     private Transform relativeAttackPos;
 
     private LayerMask whatIsEnemies;
@@ -26,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private Collider2D playerCollider;
 
     private bool canAttack = true;
-    private bool attackPosFlipped = false;
+    private bool attackPosFlipped;
 
     private void Awake()
     {

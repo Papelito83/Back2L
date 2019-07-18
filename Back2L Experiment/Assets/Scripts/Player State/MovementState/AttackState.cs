@@ -13,6 +13,7 @@ public class AttackState : PlayerMovementState
     private PlayerAttack playerAttack;
 
     private float attackAnimTime;
+    private static readonly int Attacking = Animator.StringToHash("Attacking");
 
     public AttackState(PlayerMovement playerMovement, PlayerAttack playerAttack) : base(playerMovement)
     {
@@ -24,7 +25,7 @@ public class AttackState : PlayerMovementState
 
     public override void OnEnter()
     {
-        animator.SetTrigger("Attacking");
+        animator.SetTrigger(Attacking);
 
         attackAnimTime = animClip.length;
 

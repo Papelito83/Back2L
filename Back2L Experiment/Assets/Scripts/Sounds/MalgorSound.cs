@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MalgorSound : MonoBehaviour
+namespace Component.Sounds
 {
-    public AudioClip Saut;
-    public AudioClip Attaque;
-    public AudioClip Marche;
-    public AudioSource sourceSon;
-
-    public void PlayJumpSound()
+    public class MalgorSound : MonoBehaviour
     {
-        sourceSon.PlayOneShot(Saut);
-    }
+        public AudioClip Saut;
+        public AudioClip Attaque;
+        public AudioClip Marche;
+        public AudioSource sourceSon;
 
-    void PlayAttackSound()
-    {
-        sourceSon.PlayOneShot(Attaque);
-    }
+        public void PlayJumpSound()
+        {
+            sourceSon.PlayOneShot(Saut);
+        }
 
-    void PlayWalkSound()
-    {
-        sourceSon.PlayOneShot(Marche);
+        internal void PlayAttackSound()
+        {
+            sourceSon.PlayOneShot(Attaque);
+        }
+
+        private void PlayWalkSound()
+        {
+            sourceSon.PlayOneShot(Marche);
+        }
     }
 }

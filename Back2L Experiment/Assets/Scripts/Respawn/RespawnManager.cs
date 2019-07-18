@@ -15,10 +15,10 @@ public class RespawnManager : MonoBehaviour
     public void Start()
     {
         foreach (var point in points)
-            point.PlayerFindRespawn += new EventHandler(OnPlayerFindRespawn);
+            point.PlayerFindRespawn += OnPlayerFindRespawn;
 
         foreach (var zone in zones)
-            zone.PlayerDead += new EventHandler(OnPlayerDead);
+            zone.PlayerDead += OnPlayerDead;
     }
 
     private void OnPlayerDead(object sender, EventArgs args)

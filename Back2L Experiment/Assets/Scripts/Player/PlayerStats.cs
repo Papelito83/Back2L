@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Shiva.Stats;
+
 using System.Collections;
 
 public class PlayerStats : MonoBehaviour, IDamageable
@@ -37,8 +39,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (Dead())
             Health = 0;
 
-        OnTakeDamage(this, EventArgs.Empty);
-        
+        OnTakeDamage?.Invoke(this, EventArgs.Empty);
     }
 
     public bool Dead()

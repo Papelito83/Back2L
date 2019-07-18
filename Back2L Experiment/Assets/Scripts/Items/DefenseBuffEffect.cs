@@ -17,7 +17,7 @@ public class DefenseBuffEffect : IBuffEffect
 
     public void ExecuteEffect(IMutableStat stat)
     {
-        StatModifier modifier = new StatModifier(defenseBuff, this);
+        var modifier = new StatModifier(defenseBuff, this);
 
         if (!stat.IsModified)
         {

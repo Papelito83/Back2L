@@ -10,14 +10,15 @@ public class CustomDistanceRay2D
 {
     private Ray2D ray2D;
 
-    public float distance { get; set; }
-    public Vector2 direction
+    public float Distance { get; set; }
+
+    public Vector2 Direction
     {
         get => ray2D.direction;
         set => ray2D.direction = value;
     }
 
-    public Vector2 origin
+    public Vector2 Origin
     {
         get => ray2D.origin;
         set => ray2D.origin = value;
@@ -27,7 +28,7 @@ public class CustomDistanceRay2D
     {
         ray2D = new Ray2D(origin, direction);
 
-        this.distance = distance;
+        Distance = distance;
     }
 
     public Vector2 GetPoint(float distance)

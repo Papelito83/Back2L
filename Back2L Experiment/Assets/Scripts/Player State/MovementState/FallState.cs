@@ -1,11 +1,13 @@
 ﻿using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 class FallState : PlayerMovementState
 {
-    private Animator animator;
-    private CharacterLedgeDetector ledgeDetector;
-    private LedgeGrab ledgeGrabAbility;
+    private readonly Animator animator;
+    private readonly CharacterLedgeDetector ledgeDetector;
+    private readonly LedgeGrab ledgeGrabAbility;
+    private static readonly int IsFalling = Animator.StringToHash("IsFalling");
 
     public FallState(PlayerMovement playerMovement, CharacterLedgeDetector ledgeDetector, LedgeGrab ledgeGrabAbility) : base(playerMovement)
     {
@@ -17,12 +19,12 @@ class FallState : PlayerMovementState
 
     public override void OnEnter()
     {
-        animator.SetBool("IsFalling", true);
+        animator.SetBool(IsFalling, true);
     }
 
     public override void OnExit()
     {
-        animator.SetBool("IsFalling", false);
+        animator.SetBool(IsFalling, false);
     }
 
     protected override void PerformTransition(StateMachine machine)

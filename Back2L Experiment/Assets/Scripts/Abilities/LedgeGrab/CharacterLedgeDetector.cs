@@ -1,19 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class CharacterLedgeDetector : MonoBehaviour
 {
+    private enum TouchedWallState
+    {
+        NONE,
+        FIRST
+    }
+
+    private TouchedWallState state = TouchedWallState.NONE;
+
     private Collider2D wallCollider;
 
     private I2DRayProvider rayProvider;
 
-    private RaycastHit2D[] hits = new RaycastHit2D[2]; 
-    private float[] rayOffsets = new float[2];
+    private readonly RaycastHit2D[] hits = new RaycastHit2D[2]; 
+    private readonly float[] rayOffsets = new float[2];
 
     private int layerMask;
 
-    bool firstRayHited;
+    private bool firstRayTouched;
 
     public void Start()
     {
@@ -25,7 +35,7 @@ public class CharacterLedgeDetector : MonoBehaviour
         rayOffsets[0] = 0.4f;
         rayOffsets[1] = 0.8f;
 
-        firstRayHited = false;
+        firstRayTouched = false;
     }
 
     public bool DetectWallLedge()
@@ -33,15 +43,17 @@ public class CharacterLedgeDetector : MonoBehaviour
         for (int i = 0; i < rayOffsets.Length; i++)
         {
             var ray2D = rayProvider.CreateRay(rayOffsets[i]);
-            hits[i] = Physics2D.Raycast(ray2D.origin, ray2D.direction, ray2D.distance, layerMask);
+            hits[i] = Physics2D.Raycast(ray2D.Origin, ray2D.Direction, ray2D.Distance, layerMask);
 
-            Debug.DrawRay(ray2D.origin, ray2D.direction, Color.blue);
+            Debug.DrawRay(ray2D.Origin, ray2D.Direction, Color.blue);
         }
 
-        return LedgeHitted(hits);
+        return LedgeTouched(hits);
     }
 
-    private bool LedgeHitted(RaycastHit2D[] hits)
+
+
+    private bool LedgeTouched(RaycastHit2D[] hits)
     {
         bool ledgeWallDetected = false;
 
@@ -49,9 +61,9 @@ public class CharacterLedgeDetector : MonoBehaviour
         {
             if (hits[1].collider != null)
             {
-                if (firstRayHited)
+                if (firstRayTouched)
                 {                   
-                    firstRayHited = false;
+                    firstRayTouched = false;
 
                     // petite astuce pour le système de respawn à corriger plus tard
                     if (!hits[0].collider.isTrigger)
@@ -64,14 +76,16 @@ public class CharacterLedgeDetector : MonoBehaviour
             }
             else
             {
-                firstRayHited = true;
+                firstRayTouched = true;
             }
         }
 
         return ledgeWallDetected;
     }
 
-    public Collider2D GetWallCollider()
+
+
+    public Collider2D G etWallCollider()
     {
         return wallCollider;
     }

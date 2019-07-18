@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip(float dir)
     {
-        bool flipSprite = (spriteRenderer.flipX ? (dir < 0.01f) : (dir > 0.01f));
+        var leftDir = dir < 0.01f;
+        var rightDir = dir > 0.01f;
+
+        bool flipSprite = spriteRenderer.flipX ? leftDir : rightDir;
         if (flipSprite)
         {
             spriteRenderer.flipX = !spriteRenderer.flipX;

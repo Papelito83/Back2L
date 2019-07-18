@@ -9,30 +9,29 @@ public class CharacterUI : MonoBehaviour
     public PlayerStats playerStats;
     public Image[] hearts;
 
-    float health;
-    float defense;
+    private float health;
+    private float defense;
 
     void Start()
     {
         health = playerStats.Health;
         defense = playerStats.DefenseStat.Value;
-        playerStats.OnTakeDamage += new EventHandler(OnTakeDamageUI);
+        playerStats.OnTakeDamage += HandleDamageEvent;
     }
 
     
     void Update()
     {
-        
+        throw new NotImplementedException();
     }
 
-    private void OnTakeDamageUI(object sender, EventArgs args)
+    private void HandleDamageEvent(object sender, EventArgs args)
     {
         for (int i = (int) health-1; i > playerStats.Health-1; i--) 
         {
             hearts[i].enabled = false;
             health = playerStats.Health;
         }
-            
     }
 
 

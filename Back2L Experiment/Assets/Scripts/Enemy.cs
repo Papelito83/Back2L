@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isAttacking;
     private float attackCd = 2f;
-    private float attackCdTimeleft = 0f;
+    private float attackCdTimeleft;
 
     public void Start()
     {
@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour, IDamageable
         physics.targetVelocity = Vector2.left * 10 ;
     }
 
-
     public void Kill()
     {
         Destroy(gameObject);
@@ -63,13 +62,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.tag == "Player" && !isAttacking)
-        {
-            isAttacking = true;
-            var player = collider.GetComponent<IDamageable>();
-            player.TakeDamage(1);
-            attackCdTimeleft = attackCd;
-        }
+        if(isAttacking) return;
+
+        if (!collider.CompareTag("Player")) return;
+
+        isAttacking = true;
+        var player = collider.GetComponent<IDamageable>();
+        player.TakeDamage(1);
+        attackCdTimeleft = attackCd;
     }
 }
 

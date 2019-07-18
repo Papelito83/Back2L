@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using UnityEngine;
 
 class DefensePowerUp : MonoBehaviour
 {
-    public float Radius { get; private set; }
+    public float Radius { get; set; }
 
-    DefenseBuffEffect defenseEffect;
+    private DefenseBuffEffect defenseEffect;
 
     public void Start()
     {
@@ -30,11 +29,9 @@ class DefensePowerUp : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
-        {
-            var target = collision.GetComponent<Transform>();
-            ExecuteEffect(target);          
-        }           
+        if (!collision.CompareTag("Player")) return;
+
+        var target = collision.GetComponent<Transform>();
+        ExecuteEffect(target);
     }
 }
-

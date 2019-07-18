@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-
 public class WallJumpState : PlayerMovementState
 {
     private float wallJumpTime = 0.2f;
     private float wallJumpLeft;
 
-    float direction;
-    bool started = false;
+    private float direction;
+    private bool started;
 
 
     public WallJumpState(PlayerMovement playerMovement) : base(playerMovement)

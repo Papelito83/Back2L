@@ -9,10 +9,10 @@ using UnityEngine;
 class GroundState : PlayerMovementState
 {
     // TEST
-    private PlayerAttack playerAttack;
+    private readonly PlayerAttack playerAttack;
 
-    private Animator animator;
-    private Action Blink;
+    private readonly Animator animator;
+    private readonly Action Blink;
 
     public GroundState(PlayerMovement playerMovement, PlayerAttack playerAttack) : base(playerMovement)
     {
@@ -75,6 +75,6 @@ class GroundState : PlayerMovementState
         };
 
         return Blink;
-}
+    }
 }
 

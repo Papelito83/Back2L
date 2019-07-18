@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public class Inventory
 {
@@ -28,6 +25,7 @@ public class Inventory
         }
 
         return false;
+
     }
 
     public void Remove(Item item)

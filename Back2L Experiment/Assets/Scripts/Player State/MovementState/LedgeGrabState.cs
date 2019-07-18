@@ -45,7 +45,7 @@ class LedgeGrabState : PlayerMovementState
 
     private bool LeaveGoodSide()
     {
-        float horizontalDirection = Input.GetAxisRaw("Horizontal");
+        var horizontalDirection = Input.GetAxisRaw("Horizontal");
 
         if (playerMovement.DirectionFlipped() && horizontalDirection < 0)
             return true;

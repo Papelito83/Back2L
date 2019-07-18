@@ -2,8 +2,9 @@
 
 public class JumpState : PlayerMovementState
 {
-    private Animator animator;
-    private MalgorSound malgorSound;
+    private readonly Animator animator;
+    private readonly MalgorSound malgorSound;
+    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
 
     public JumpState(PlayerMovement playerMovement) : base(playerMovement)
     {
@@ -14,7 +15,7 @@ public class JumpState : PlayerMovementState
 
     public override void OnEnter()
     {
-        animator.SetBool("IsJumping", true);
+        animator.SetBool(IsJumping, true);
 
         malgorSound.PlayJumpSound();
 
@@ -23,7 +24,7 @@ public class JumpState : PlayerMovementState
 
     public override void OnExit()
     {
-        animator.SetBool("IsJumping", false);
+        animator.SetBool(IsJumping, false);
     }
 
     protected override void PerformTransition(StateMachine machine)

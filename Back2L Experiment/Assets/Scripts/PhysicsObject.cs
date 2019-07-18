@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -34,7 +33,7 @@ public class PhysicsObject : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         Collider2D[] colliders = GetComponents<Collider2D>();
-        mainCollider = colliders.Where(x => !x.isTrigger).Single();       
+        mainCollider = colliders.Single(x => !x.isTrigger);       
     }
 
     void Start()

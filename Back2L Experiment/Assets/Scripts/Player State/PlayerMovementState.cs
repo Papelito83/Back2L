@@ -57,14 +57,14 @@ public abstract class PlayerMovementState : IState
 
     protected void HandleMovement()
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        var x = Input.GetAxisRaw("Horizontal");
 
         playerMovement.MoveHorizontal(x);
     }
 
     protected void HandleMovement(float divideCoeff)
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        var x = Input.GetAxisRaw("Horizontal");
 
         playerMovement.MoveHorizontal(divideCoeff * x);
     }

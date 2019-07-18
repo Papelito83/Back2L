@@ -30,10 +30,14 @@ public class Character2DRayProvider : MonoBehaviour, I2DRayProvider
     /// <returns>Ray2D wrapper with information for the distance</returns>
     public CustomDistanceRay2D CreateRay(float rayOffset)
     {
-        int direction = playerMovement.DirectionFlipped() ? 1 : -1;
+        var direction = playerMovement.DirectionFlipped() ? 1 : -1;
+        var bounds = playerCollider.bounds;
+        
+        var adjustPositionOnX = direction * bounds.extents.x;
+        var adjustPositionOnY = rayOffset * bounds.extents.y;
 
-        Vector2 playerColliderCenter = playerCollider.bounds.center;
-        Vector2 adjustingPosition = new Vector2(direction * playerCollider.bounds.extents.x, rayOffset * playerCollider.bounds.extents.y);
+        Vector2 playerColliderCenter = bounds.center;
+        Vector2 adjustingPosition = new Vector2(adjustPositionOnX, adjustPositionOnY);
         
         rayOrigin = playerColliderCenter + adjustingPosition;
 

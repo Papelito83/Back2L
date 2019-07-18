@@ -3,13 +3,12 @@ using System.Collections;
 
 public class FollowCamera : MonoBehaviour
 {
-
     public float interpVelocity;
     public float minDistance;
     public float followDistance;
     public GameObject target;
     public Vector3 offset;
-    Vector3 targetPos;
+    private Vector3 targetPos;
 
     void Start()
     {
@@ -18,24 +17,27 @@ public class FollowCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target)
+        if (!target) return;
+
+        var position = transform.position;
+        var targetCurrentPosition = target.transform.position;
+
+        Vector3 posNoZ = transform.position;
+        posNoZ.z = targetCurrentPosition.z;
+
+        Vector3 targetDirection = (targetCurrentPosition - posNoZ);
+
+        interpVelocity = targetDirection.magnitude * 15f;
+
+        if (interpVelocity <= 2)
         {
-            Vector3 posNoZ = transform.position;
-            posNoZ.z = target.transform.position.z;
-
-            Vector3 targetDirection = (target.transform.position - posNoZ);
-
-            interpVelocity = targetDirection.magnitude * 15f;
-
-            if (interpVelocity <= 2)
-            {
-                interpVelocity = 0;
-            }
-
-            targetPos = transform.position + (targetDirection.normalized * interpVelocity * Time.deltaTime);
-
-            transform.position = Vector3.Lerp(transform.position, targetPos + offset, 0.25f);
-
+            interpVelocity = 0;
         }
+
+        var deltaPos = interpVelocity * Time.deltaTime * targetDirection.normalized;
+        targetPos = position + deltaPos;
+
+        position = Vector3.Lerp(position, targetPos + offset, 0.25f);
+        transform.position = position;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 class DashState : PlayerMovementState
 {
-    private Dash dash;
+    private readonly Dash dash;
 
     public DashState(PlayerMovement playerMovement, Dash dash) : base(playerMovement)
     {
